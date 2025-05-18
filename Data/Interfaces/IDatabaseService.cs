@@ -11,7 +11,9 @@ namespace RechnungenPrivat.Data.Interfaces
     {
         Task<Kunde> GetKundeByIdAsync(int id);
         Task<List<Kunde>> GetAllKundenAsync();
+        Task<Kunde> GetKundeByNameAsync(string name);
         Task<int> SaveKundeAsync(Kunde kunde);
         Task<int> DeleteKundeAsync(Kunde kunde);
+        Task<int> DeleteKundeByName(string kundennamen);
     }
 }

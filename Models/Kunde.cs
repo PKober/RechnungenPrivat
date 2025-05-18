@@ -13,7 +13,7 @@ namespace RechnungenPrivat.Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         [MaxLength(100)]
-        public string Kundenname { get; set; }
+        public string KundenName { get; set; }
         [MaxLength(100)]
         public string KundenAdresse { get; set; }
     }

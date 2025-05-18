@@ -4,7 +4,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:RechnungenPrivat.Views.Startseite"
-    xmlns:KundeAnlegen="clr-namespace:RechnungenPrivat.Views.KundenAnlegen"   
+    xmlns:KundeAnlegen="clr-namespace:RechnungenPrivat.Views.KundenAnlegen"  
+    xmlns:KundenLöschen="clr-namespace:RechnungenPrivat.Views.KundenLöschen"
     Shell.FlyoutBehavior="Flyout"
     Title="RechnungenPrivat">
 
@@ -17,6 +18,9 @@
         Title="Kundenanlegen"
         ContentTemplate="{DataTemplate KundeAnlegen:KundenAnlegenView}"
         />
-    
+    <ShellContent
+        Title="Kundenlöschen"
+        ContentTemplate="{DataTemplate KundenLöschen:KundenLöschenView}"/>
+
 
 </Shell>
