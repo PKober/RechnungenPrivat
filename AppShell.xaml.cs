@@ -1,4 +1,5 @@
 ﻿using RechnungenPrivat.Views.KundenAnlegen;
+using RechnungenPrivat.Views.Startseite;
 
 namespace RechnungenPrivat
 {
@@ -8,6 +9,7 @@ namespace RechnungenPrivat
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(KundenAnlegenView), typeof(KundenAnlegenView));
+            Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
         }
     }
 }
