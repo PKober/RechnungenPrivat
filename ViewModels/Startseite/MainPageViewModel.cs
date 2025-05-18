@@ -1,0 +1,29 @@
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using RechnungenPrivat.Data.Interfaces;
+using RechnungenPrivat.Views.KundenAnlegen;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace RechnungenPrivat.ViewModels.Startseite
+{
+    public partial class MainPageViewModel : ObservableObject
+    {
+        private readonly INavigationService _navigationService;
+
+        public MainPageViewModel(INavigationService navigationService)
+        {
+            _navigationService = navigationService;
+        }
+
+        [RelayCommand]
+        public async Task GoToKundenAnlegen()
+        {
+            var route = $"{nameof(KundenAnlegenView)}";
+            await _navigationService.NavigateToAsync(route);
+        }
+    }
+}
