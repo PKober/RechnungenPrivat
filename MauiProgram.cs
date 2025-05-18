@@ -3,9 +3,11 @@ using RechnungenPrivat.Data.Datenbank;
 using RechnungenPrivat.Data.Interfaces;
 using RechnungenPrivat.Navigation;
 using RechnungenPrivat.ViewModels.KundenAnlegen;
+using RechnungenPrivat.ViewModels.KundenAnzeigen;
 using RechnungenPrivat.ViewModels.KundenLöschen;
 using RechnungenPrivat.ViewModels.Startseite;
 using RechnungenPrivat.Views.KundenAnlegen;
+using RechnungenPrivat.Views.KundenAnzeigen;
 using RechnungenPrivat.Views.KundenLöschen;
 using RechnungenPrivat.Views.Startseite;
 
@@ -33,11 +35,13 @@ public static class MauiProgram
         builder.Services.AddTransient<MainPageViewModel>();
 		builder.Services.AddTransient<KundenAnlegenViewModel>();
 		builder.Services.AddTransient<KundenLöschenViewModel>();
+		builder.Services.AddTransient<KundenAnzeigenViewModel>();
 
         // Register the Views
         builder.Services.AddTransient<MainPage>();
 		builder.Services.AddTransient<KundenAnlegenView>();
 		builder.Services.AddTransient<KundenLöschenView>();
+		builder.Services.AddTransient<KundenAnzeigenView>();
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:RechnungenPrivat.Views.Startseite"
     xmlns:KundeAnlegen="clr-namespace:RechnungenPrivat.Views.KundenAnlegen"  
     xmlns:KundenLöschen="clr-namespace:RechnungenPrivat.Views.KundenLöschen"
+    xmlns:KundenAnzeigen="clr-namespace:RechnungenPrivat.Views.KundenAnzeigen"
     Shell.FlyoutBehavior="Flyout"
     Title="RechnungenPrivat">
 
@@ -21,6 +22,10 @@
     <ShellContent
         Title="Kundenlöschen"
         ContentTemplate="{DataTemplate KundenLöschen:KundenLöschenView}"/>
+
+    <ShellContent
+        Title="Kunden Anzeigen"
+        ContentTemplate="{DataTemplate KundenAnzeigen:KundenAnzeigenView}"/>
 
 
 </Shell>

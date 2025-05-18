@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RechnungenPrivat.Views.KundenAnzeigen.KundenAnzeigenView"
+             xmlns:viewmodel="clr-namespace:RechnungenPrivat.ViewModels.KundenAnzeigen"
+             x:DataType="viewmodel:KundenAnzeigenViewModel"
+             xmlns:model="clr-namespace:RechnungenPrivat.Models"
+             Title="Kunden Anzeigen">
+    <Grid RowDefinitions="Auto, *">
+
+        <Label Text="Alle Kunden"
+               Grid.Row="0"
+               FontSize="Large"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               Margin="0,20,0,10"/>
+
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding Kunden}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedKunde, Mode=TwoWay}"
+                        EmptyView="Keine Kunden gefunden.">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"
+                                   ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Kunde">
+                    <Border Stroke="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray700}}"
+                            StrokeThickness="1"
+                            Padding="15"
+                            Margin="10,0,10,0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="8"/>
+                        </Border.StrokeShape>
+                        <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding KundenName}" FontSize="Medium" FontAttributes="Bold"/>
+                            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding KundenAdresse}" FontSize="Small" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}"/>
+
+                            <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Source="chevron_right.png" HeightRequest="20" WidthRequest="20"
+                                   VerticalOptions="Center"
+                                   Aspect="AspectFit"
+                                   IsVisible="{OnPlatform iOS=true, Android=true, Default=false}"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <CollectionView.Header>
+                <RefreshView IsRefreshing="{Binding IsRefreshing}">
+
+                </RefreshView>
+            </CollectionView.Header>
+
+        </CollectionView>
+    </Grid>
+</ContentPage>

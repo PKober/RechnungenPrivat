@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using RechnungenPrivat.Data.Interfaces;
 using RechnungenPrivat.Views.KundenAnlegen;
+using RechnungenPrivat.Views.KundenLöschen;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,13 @@ namespace RechnungenPrivat.ViewModels.Startseite
         public async Task GoToKundenAnlegen()
         {
             var route = $"{nameof(KundenAnlegenView)}";
+            await _navigationService.NavigateToAsync(route);
+        }
+
+        [RelayCommand]
+        public async Task GoToKundenLöschen()
+        {
+            var route = $"{nameof(KundenLöschenView)}";
             await _navigationService.NavigateToAsync(route);
         }
     }
