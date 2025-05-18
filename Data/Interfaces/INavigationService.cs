@@ -12,6 +12,6 @@ namespace RechnungenPrivat.Data.Interfaces
         Task NavigateToAsync(string route);
         Task NavigateToAsync<T>(string route, IDictionary<string,object> parameters);
         Task GoBackAsync();
-
+        
     }
 }

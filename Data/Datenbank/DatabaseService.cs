@@ -72,14 +72,25 @@ namespace RechnungenPrivat.Data.Datenbank
             }
             else
             {
-                var kundenCheck = await _database.Table<Kunde>().Where(k => k.Kundenname == kunde.Kundenname).FirstOrDefaultAsync();
-                if (kunde.Kundenname == kundenCheck.Kundenname)
+                var kundenCheck = await GetAllKundenAsync();
+                if (kundenCheck != null)
                 {
-                    return 0;
+                    foreach (var k in kundenCheck)
+                    {
+                        if (kunde.Kundenname == k.Kundenname)
+                        {
+                            return 0;
+                        }
+                        else
+                        {
+                            return await _database.InsertAsync(kunde);
+                        }
+                    }
+                    return await _database.InsertAsync(kunde);
                 }
                 else
                 {
-                    return await _database.InsertAsync(kunde);
+                    return 0; 
                 }
             }
         }

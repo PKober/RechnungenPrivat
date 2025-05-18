@@ -1,14 +1,63 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:RechnungenPrivat.ViewModels.KundenAnlegen"
+             xmlns:viewmodel="clr-namespace:RechnungenPrivat.ViewModels.KundenAnlegen"
              x:Class="RechnungenPrivat.Views.KundenAnlegen.KundenAnlegenView"
-             x:DataType="vm:KundenAnlegenViewModel"
+             x:DataType="viewmodel:KundenAnlegenViewModel"
              Title="Kunden Anlegen">
-    <VerticalStackLayout>
-        <Label 
-            Text="Kunden anlegen Seite"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <VerticalStackLayout Spacing="15" Padding="20,20,20,0">
+
+        <Label Text="Neuen Kunden anlegen"
+                   FontSize="Large" FontAttributes="Bold"
+                   HorizontalOptions="Center" 
+                   Margin="0,0,0,15"/>
+
+        <Border     StrokeThickness="1"
+                    Padding="12"
+                    Margin="0,0,0,10">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="8"/>
+            </Border.StrokeShape>
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Kundenname" FontSize="Medium" />
+                <Entry Text="{Binding Kundenname}"
+                           Placeholder="Namen des Kunden eingeben"
+                           FontSize="Medium"
+                           ClearButtonVisibility="WhileEditing"/>
+            </VerticalStackLayout>
+        </Border>
+
+        <Border 
+                    StrokeThickness="1"
+                    Padding="12"
+                    Margin="0,0,0,10">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="8"/>
+            </Border.StrokeShape>
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Kundenadresse" FontSize="Medium" />
+                <Editor Text="{Binding Kundenadresse}"
+                            Placeholder="Adresse des Kunden eingeben"
+                            AutoSize="TextChanges"
+                            FontSize="Medium"
+                            HeightRequest="120"/>
+            </VerticalStackLayout>
+        </Border>
+
+        <Button Text="Speichern"
+                    Command="{Binding SaveKundeCommand}" 
+                    HorizontalOptions="Fill"
+                    Margin="0,15,0,20"
+                    HeightRequest="50"
+                    TextColor="White"
+                    FontSize="Medium">
+            <Button.CornerRadius>
+                <OnPlatform x:TypeArguments="x:Int32">
+                    <On Platform="iOS, Android, MacCatalyst" Value="25"/>
+                    <On Platform="Windows" Value="5"/>
+                </OnPlatform>
+            </Button.CornerRadius>
+        </Button>
+
     </VerticalStackLayout>
 </ContentPage>
