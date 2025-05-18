@@ -77,7 +77,7 @@ namespace RechnungenPrivat.Data.Datenbank
                 {
                     foreach (var k in kundenCheck)
                     {
-                        if (kunde.Kundenname == k.Kundenname)
+                        if (kunde.KundenName == k.KundenName)
                         {
                             return 0;
                         }
@@ -95,6 +95,31 @@ namespace RechnungenPrivat.Data.Datenbank
             }
         }
 
+        /// <summary>
+        /// This method retrieves a customer by its name from the database. 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public async Task<Kunde> GetKundeByNameAsync(string name)
+        {
+            await Init();
+            return await _database.Table<Kunde>().Where(k => k.KundenName == name).FirstOrDefaultAsync();
+        }
 
+        /// <summary>
+        /// This method deletes a customer by its name from the database.   
+        /// </summary>
+        /// <param name="kundennamen"></param>
+        /// <returns></returns>
+        public async Task<int> DeleteKundeByName(string kundennamen)
+        {
+            await Init();
+            var kunde = await GetKundeByNameAsync(kundennamen);
+            if (kunde != null)
+            {
+                return await _database.DeleteAsync(kunde);
+            }
+            return 0;
+        }   
     }
 }

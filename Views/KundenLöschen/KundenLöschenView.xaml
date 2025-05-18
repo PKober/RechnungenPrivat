@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RechnungenPrivat.Views.KundenLöschen.KundenLöschenView"
+             xmlns:viewmodel="clr-namespace:RechnungenPrivat.ViewModels.KundenLöschen"
+             x:DataType="viewmodel:KundenLöschenViewModel"
+             Title="Kunden Löschen">
+    <VerticalStackLayout Spacing="15" Padding="20,20,20,0">
+
+        <Label Text="Kunden Löschen"
+                   FontSize="Large" FontAttributes="Bold"
+                   HorizontalOptions="Center" 
+                   Margin="0,0,0,15"/>
+
+        <Border     StrokeThickness="1"
+                    Padding="12"
+                    Margin="0,0,0,10">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="8"/>
+            </Border.StrokeShape>
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Kundenname" FontSize="Medium" />
+                <Entry Text="{Binding Kundenname}"
+                           Placeholder="Namen des Kunden eingeben"
+                           FontSize="Medium"
+                           ClearButtonVisibility="WhileEditing"/>
+            </VerticalStackLayout>
+        </Border>
+
+        <Border 
+                    StrokeThickness="1"
+                    Padding="12"
+                    Margin="0,0,0,10">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="8"/>
+            </Border.StrokeShape>
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Kundenadresse" FontSize="Medium" />
+                <Editor Text="{Binding Kundenadresse}"
+                            Placeholder="Adresse des Kunden eingeben"
+                            AutoSize="TextChanges"
+                            FontSize="Medium"
+                            HeightRequest="120"/>
+            </VerticalStackLayout>
+        </Border>
+
+        <Button Text="Löschen"
+                    Command="{Binding LöscheKundeCommand }" 
+                    HorizontalOptions="Fill"
+                    Margin="0,15,0,20"
+                    HeightRequest="50"
+                    TextColor="White"
+                    FontSize="Medium">
+            <Button.CornerRadius>
+                <OnPlatform x:TypeArguments="x:Int32">
+                    <On Platform="iOS, Android, MacCatalyst" Value="25"/>
+                    <On Platform="Windows" Value="5"/>
+                </OnPlatform>
+            </Button.CornerRadius>
+        </Button>
+
+    </VerticalStackLayout>
+</ContentPage>
