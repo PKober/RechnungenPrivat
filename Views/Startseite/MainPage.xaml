@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RechnungenPrivat.Views.Startseite.MainPage"
-             xmlns:vm="clr-namespace:RechnungenPrivat.ViewModels.Startseite"
+             xmlns:viewmodel="clr-namespace:RechnungenPrivat.ViewModels.Startseite"
+             x:DataType="viewmodel:MainPageViewModel"
              >
             
 
@@ -28,8 +29,18 @@
                 SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
 
             <Button
-                Text="Got To Kundenanlegen"
+                Text="Go To Kundenanlegen"
                 Command="{Binding GoToKundenAnlegenCommand}"
+                />
+
+            <Button
+                Text="Go To Kundelöschen"
+                Command="{Binding GoToKundenLöschenCommand}"
+                />
+
+            <Button
+                Text="Go To Kunden liste anzeigen"
+                Command="{Binding GoToKundenAnzeigenCommand}"
                 />
         </VerticalStackLayout>
     </ScrollView>
