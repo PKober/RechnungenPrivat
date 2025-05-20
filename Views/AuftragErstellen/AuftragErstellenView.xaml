@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RechnungenPrivat.Views.AuftragErstellen.AuftragErstellenView"
+             xmlns:viewmodel="clr-namespace:RechnungenPrivat.ViewModels.AuftragErstellen"
+             x:DataType="viewmodel:AuftragErstellenViewModel"
+             xmlns:model="clr-namespace:RechnungenPrivat.Models"
+             Title="Auftrag Erstellen">
+
+
+    <ScrollView >
+
+        <VerticalStackLayout Spacing="15" Padding="20">
+
+
+
+            <Label Text="Auftragsdetails" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,15"/>
+
+            <Border Style="{StaticResource CardBorder}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Auftragsdatum" FontSize="Medium"/>
+                    <DatePicker Date="{Binding Auftragsdatum, Converter={StaticResource DateOnlyToDateTimeConverter}}" FontSize="Medium"/>
+
+
+                </VerticalStackLayout>
+            </Border>
+
+
+            <Border Style="{StaticResource CardBorder}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Beschreibung" FontSize="Medium"/>
+                    <Editor Text="{Binding Auftragsbeschreibung}" Placeholder="Auftragsdetails..." AutoSize="TextChanges" HeightRequest="100" FontSize="Medium"/>
+                </VerticalStackLayout>
+            </Border>
+
+
+            <Border Style="{StaticResource CardBorder}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Auftragstyp" FontSize="Medium"/>
+                    <Picker ItemsSource="{Binding Auftragstypen}"
+                            SelectedItem="{Binding SelectedAuftragstyp}"
+                            FontSize="Medium"/>
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+</ContentPage>
