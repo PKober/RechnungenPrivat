@@ -16,5 +16,9 @@ namespace RechnungenPrivat.Models
         public string KundenName { get; set; }
         [MaxLength(100)]
         public string KundenAdresse { get; set; }
+
+
+        
+
     }
 }

@@ -37,6 +37,11 @@
                 Text="Go To Kundelöschen"
                 Command="{Binding GoToKundenLöschenCommand}"
                 />
+
+            <Button
+                Text="Go To Kunden liste anzeigen"
+                Command="{Binding GoToKundenAnzeigenCommand}"
+                />
         </VerticalStackLayout>
     </ScrollView>
 

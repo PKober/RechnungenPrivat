@@ -28,7 +28,7 @@ namespace RechnungenPrivat.ViewModels.KundenAnzeigen
 
         public async Task LoadKundenAsync()
         {
-            IsRefreshing = true; // Zeigt den Ladeindikator (falls Pull-to-Refresh verwendet wird)
+            IsRefreshing = true;
             var kundenListe = await _databaseService.GetAllKundenAsync();
             if (kundenListe != null)
             {
