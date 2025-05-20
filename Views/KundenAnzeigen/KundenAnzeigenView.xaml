@@ -18,7 +18,7 @@
         <CollectionView Grid.Row="1"
                         ItemsSource="{Binding Kunden}"
                         SelectionMode="Single"
-                        SelectedItem="{Binding SelectedKunde, Mode=TwoWay}"
+                        SelectedItem="{Binding SelectedKunde, Mode=TwoWay}" SelectionChangedCommand="{Binding GoToKundenDetailsCommand }"
                         EmptyView="Keine Kunden gefunden.">
 
             <CollectionView.ItemsLayout>

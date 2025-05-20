@@ -26,6 +26,9 @@ namespace RechnungenPrivat.ViewModels.KundenAnzeigen
         [ObservableProperty]
         private bool _isRefreshing;
 
+        [ObservableProperty]
+        private Kunde _selectedKunde;
+
         public async Task LoadKundenAsync()
         {
             IsRefreshing = true;
@@ -41,6 +44,28 @@ namespace RechnungenPrivat.ViewModels.KundenAnzeigen
             IsRefreshing = false;
         }
 
+        [RelayCommand]
+        private async Task GoToKundenDetails(Kunde kundeParameter)
+        {
+
+            Kunde kundeFürAktion = null;
+
+            if (kundeParameter != null)
+            {
+                
+                kundeFürAktion = kundeParameter;
+            }
+            else if (SelectedKunde != null)
+            {
+                kundeFürAktion = SelectedKunde;
+            }
+
+            if (kundeFürAktion == null)
+                return;
+
+            await Shell.Current.DisplayAlert("Ausgewählter Kunde", $"Name: {kundeFürAktion.KundenName}\nAdresse: {kundeFürAktion.KundenAdresse}", "OK");
+
+        }
 
     }
 }
