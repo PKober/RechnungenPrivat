@@ -71,6 +71,9 @@
 	  <Compile Update="Views\AuftragErstellen\AuftragErstellenView.xaml.cs">
 	    <DependentUpon>AuftragErstellenView.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\AuftragErstellen\AuftragErstellenView.xaml.cs">
+	    <DependentUpon>AuftragErstellenView.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\KundenAnlegen\KundenAnlegenView.xaml.cs">
 	    <DependentUpon>KundenAnlegenView.xaml</DependentUpon>
 	  </Compile>

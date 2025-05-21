@@ -23,12 +23,9 @@ namespace RechnungenPrivat.Models
         public int KundeId { get; set; }
         [MaxLength(500)]
         public string Beschreibung { get; set;}
-
         public decimal Betrag { get; set; }
-        public DateOnly Auftragsdatum;
+        public DateTime? Auftragsdatum { get; set; }
         public Auftragstyp Typ { get; set; }
-
-
         public decimal? Stunden { get; set; }
         public decimal? Stundensatz { get; set; }
         public string Auftragsname { get; set; }

@@ -28,6 +28,8 @@ namespace RechnungenPrivat.Data.Datenbank
             _database = new SQLiteAsyncConnection(DbPath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache);
             await _database.CreateTableAsync<Kunde>();
             await _database.CreateTableAsync<Auftrag>();
+
+
         }
         /// <summary>
         /// This method deletes a customer from the database.
@@ -108,10 +110,29 @@ namespace RechnungenPrivat.Data.Datenbank
             return await _database.Table<Kunde>().Where(k => k.KundenName == name).FirstOrDefaultAsync();
         }
         /// <summary>
+        /// This Method retrieves a Customer by his ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<string> GetKundeByID(int id)
+        {
+            await Init();
+            var kunde = await _database.Table<Kunde>().Where(k => k.Id == id).FirstOrDefaultAsync();
+            if (kunde != null)
+            {
+                return  kunde.KundenName; 
+            }
+            else
+            {
+                return "Kunde nicht gefunden";
+            }
+        }
+        /// <summary>
         /// This method deletes a customer by its name from the database.   
         /// </summary>
         /// <param name="kundennamen"></param>
         /// <returns></returns>
+        /// 
         public async Task<int> DeleteKundeByName(string kundennamen)
         {
             await Init();
@@ -202,6 +223,16 @@ namespace RechnungenPrivat.Data.Datenbank
         {
             await Init();
             return await _database.Table<Auftrag>().Where(a => a.KundeId == kundeId).ToListAsync();
+        }
+        /// <summary>
+        /// This method retrieves all customers by the order ID from the database.
+        /// </summary>
+        /// <param name="auftragId"></param>
+        /// <returns></returns>
+        public async Task<List<Kunde>> GetAllKundenByAuftragIdAsync(int auftragId)
+        {
+            await Init();
+            return await _database.Table<Kunde>().Where(k => k.Id == auftragId).ToListAsync();
         }
     }
 }

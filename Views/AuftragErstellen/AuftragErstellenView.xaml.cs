@@ -1,9 +1,13 @@
+using RechnungenPrivat.ViewModels.AuftragErstellen;
+using RechnungenPrivat.ViewModels.KundenAnlegen;
+
 namespace RechnungenPrivat.Views.AuftragErstellen;
 
 public partial class AuftragErstellenView : ContentPage
 {
-	public AuftragErstellenView()
+	public AuftragErstellenView(AuftragErstellenViewModel auftragErstellenViewModel)
 	{
 		InitializeComponent();
+		BindingContext = auftragErstellenViewModel;
 	}
 }
