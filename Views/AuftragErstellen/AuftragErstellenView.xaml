@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:RechnungenPrivat.ViewModels.AuftragErstellen"
+             xmlns:model="clr-namespace:RechnungenPrivat.Models" 
+             x:Class="RechnungenPrivat.Views.AuftragErstellen.AuftragErstellenView"
+             x:DataType="vm:AuftragErstellenViewModel"
+             Title="Neuen Auftrag erstellen">
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="20">
+
+            <Label Text="Auftragsdetails" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,15"/>
+           
+            <Border Style="{StaticResource CardBorder}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Autragsname" FontSize="Medium"/>
+                    <Entry Text="{Binding Auftragsname}" Placeholder="z.B. 5,5" Keyboard="Numeric" FontSize="Medium"/>
+
+                </VerticalStackLayout>
+            </Border>
+            
+            <Border Style="{StaticResource CardBorder}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Beschreibung" FontSize="Medium"/>
+                    <Editor Text="{Binding Auftragsbeschreibung}" Placeholder="Auftragsdetails..." AutoSize="TextChanges" HeightRequest="100" FontSize="Medium"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource CardBorder}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Auftragstyp" FontSize="Medium"/>
+                    <Picker ItemsSource="{Binding Auftragstypen}"
+                            SelectedItem="{Binding SelectedAuftragstyp}"
+                            FontSize="Medium"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border IsVisible="{Binding IsStundenbasiert}" Style="{StaticResource CardBorder}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Anzahl Stunden" FontSize="Medium"/>
+                    <Entry Text="{Binding Stunden}" Placeholder="z.B. 5,5" Keyboard="Numeric" FontSize="Medium"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border IsVisible="{Binding IsStundenbasiert}" Style="{StaticResource CardBorder}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Stundensatz (€)" FontSize="Medium"/>
+                    <Entry Text="{Binding Stundensatz}" Placeholder="z.B. 80,00" Keyboard="Numeric" FontSize="Medium"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource CardBorder}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Gesamtbetrag (€)" FontSize="Medium"/>
+                    <Entry Text="{Binding Betrag}"
+                           Placeholder="Gesamtbetrag eingeben"
+                           Keyboard="Numeric"
+                           FontSize="Medium"
+                           IsEnabled="{Binding Source={x:Reference Name=AuftragstypPicker}, Path=SelectedItem, Converter={StaticResource IsPauschalConverter}}"/>
+                </VerticalStackLayout>
+            </Border>
+            <Button Text="Auftrag speichern"
+                    Command="{Binding SaveAuftragCommand}"
+                    HorizontalOptions="Fill"
+                    Margin="0,15,0,20"
+                    HeightRequest="50"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="White"
+                    FontSize="Medium">
+                <Button.CornerRadius>
+                    <OnPlatform x:TypeArguments="x:Int32">
+                        <On Platform="iOS, Android, MacCatalyst" Value="25"/>
+                        <On Platform="Windows" Value="5"/>
+                    </OnPlatform>
+                </Button.CornerRadius>
+            </Button>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

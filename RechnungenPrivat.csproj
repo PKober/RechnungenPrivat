@@ -68,6 +68,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\AuftragErstellen\AuftragErstellenView.xaml.cs">
+	    <DependentUpon>AuftragErstellenView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\AuftragErstellen\AuftragErstellenView.xaml.cs">
+	    <DependentUpon>AuftragErstellenView.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\KundenAnlegen\KundenAnlegenView.xaml.cs">
 	    <DependentUpon>KundenAnlegenView.xaml</DependentUpon>
 	  </Compile>
@@ -80,6 +86,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\AuftragErstellen\AuftragErstellenView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\KundenAnlegen\KundenAnlegenView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

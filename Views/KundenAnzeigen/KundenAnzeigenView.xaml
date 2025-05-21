@@ -55,5 +55,9 @@
             </CollectionView.Header>
 
         </CollectionView>
+
+        <Button Text="Neuen Auftrag für ausgewählten Kunden"
+        Command="{Binding AuftragErstellenFuerKundenCommand}"
+        IsEnabled="{Binding SelectedKunde, Converter={StaticResource IsNotNullToBoolConverter}}" Margin="10"/>
     </Grid>
 </ContentPage>

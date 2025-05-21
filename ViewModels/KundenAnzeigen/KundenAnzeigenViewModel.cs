@@ -2,7 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using RechnungenPrivat.Data.Interfaces;
 using RechnungenPrivat.Models;
-
+using RechnungenPrivat.Views.AuftragErstellen;
 using System.Collections.ObjectModel;
 
 
@@ -65,6 +65,18 @@ namespace RechnungenPrivat.ViewModels.KundenAnzeigen
 
             await Shell.Current.DisplayAlert("Ausgewählter Kunde", $"Name: {kundeFürAktion.KundenName}\nAdresse: {kundeFürAktion.KundenAdresse}", "OK");
 
+        }
+
+        [RelayCommand]
+        private async Task AuftragErstellenFuerKundenAsync()
+        {
+            if (SelectedKunde == null)
+            {
+                await Shell.Current.DisplayAlert("Fehler", "Bitte wählen Sie zuerst einen Kunden aus", "Ok");
+                return; 
+            }
+
+            await _navigationService.NavigateToAsync($"{nameof(AuftragErstellenView)}?KundenId={SelectedKunde.Id}");
         }
 
     }
