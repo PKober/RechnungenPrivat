@@ -6,6 +6,7 @@ using RechnungenPrivat.Views.Startseite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -56,10 +57,30 @@ namespace RechnungenPrivat.ViewModels.AuftragErstellen
         private string _kundenNamen;
 
         
+
          partial void OnKundenIdChanged(int value)
         {
-            // Hier könntest du z.B. den Kundennamen laden und anzeigen, wenn benötigt
-            System.Diagnostics.Debug.WriteLine($"Auftrag wird für KundenId erstellt: {value}");
+            _ = LoadKundenDetailsAsync(value);
+        }
+
+        private async Task LoadKundenDetailsAsync(int kundenID  )
+        {
+            var kunde = await _databaseService.GetKundeByIdAsync(kundenID);
+
+            if (kunde != null)
+            {
+                KundenNamen = kunde.KundenName;
+            }
+        }
+
+        partial void OnStundensatzChanged(decimal value)
+        {
+            _ = BerechneBetragAsync();
+        }
+
+        private async Task BerechneBetragAsync()
+        {
+            Betrag = Stunden * Stundensatz;
         }
 
         [RelayCommand]
@@ -94,5 +115,7 @@ namespace RechnungenPrivat.ViewModels.AuftragErstellen
                 await Shell.Current.DisplayAlert("Fehler", "Fehler beim Speichern des Auftrags.", "OK");
             }
         }
+
+
     }
 }

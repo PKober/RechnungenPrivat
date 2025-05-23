@@ -10,8 +10,17 @@
         <VerticalStackLayout Spacing="15" Padding="20">
 
             <Label Text="Auftragsdetails" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,15"/>
-           
-            <Border Style="{StaticResource CardBorder}">
+            
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                <Label Text="KundenID:" HorizontalOptions="Center" FontSize="Medium" />
+                <Label Text="{Binding KundenId}"  FontSize="Medium" HorizontalOptions="Center"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                <Label Text="Kundenname:    " HorizontalOptions="Center" FontSize="Medium" ></Label>
+                <Label Text="{Binding KundenNamen}" FontSize="Medium"/>
+            </HorizontalStackLayout>
+            
+            <Border >
                 <VerticalStackLayout Spacing="8">
                     <Label Text="Autragsname" FontSize="Medium"/>
                     <Entry Text="{Binding Auftragsname}" Placeholder="z.B. 5,5" Keyboard="Numeric" FontSize="Medium"/>
@@ -19,14 +28,14 @@
                 </VerticalStackLayout>
             </Border>
             
-            <Border Style="{StaticResource CardBorder}">
+            <Border >
                 <VerticalStackLayout Spacing="8">
                     <Label Text="Beschreibung" FontSize="Medium"/>
                     <Editor Text="{Binding Auftragsbeschreibung}" Placeholder="Auftragsdetails..." AutoSize="TextChanges" HeightRequest="100" FontSize="Medium"/>
                 </VerticalStackLayout>
             </Border>
 
-            <Border Style="{StaticResource CardBorder}">
+            <Border>
                 <VerticalStackLayout Spacing="8">
                     <Label Text="Auftragstyp" FontSize="Medium"/>
                     <Picker ItemsSource="{Binding Auftragstypen}"
@@ -35,28 +44,28 @@
                 </VerticalStackLayout>
             </Border>
 
-            <Border IsVisible="{Binding IsStundenbasiert}" Style="{StaticResource CardBorder}">
+            <Border IsVisible="{Binding IsStundenbasiert}">
                 <VerticalStackLayout Spacing="8">
                     <Label Text="Anzahl Stunden" FontSize="Medium"/>
                     <Entry Text="{Binding Stunden}" Placeholder="z.B. 5,5" Keyboard="Numeric" FontSize="Medium"/>
                 </VerticalStackLayout>
             </Border>
 
-            <Border IsVisible="{Binding IsStundenbasiert}" Style="{StaticResource CardBorder}">
+            <Border IsVisible="{Binding IsStundenbasiert}">
                 <VerticalStackLayout Spacing="8">
                     <Label Text="Stundensatz (€)" FontSize="Medium"/>
                     <Entry Text="{Binding Stundensatz}" Placeholder="z.B. 80,00" Keyboard="Numeric" FontSize="Medium"/>
                 </VerticalStackLayout>
             </Border>
 
-            <Border Style="{StaticResource CardBorder}">
+            <Border >
                 <VerticalStackLayout Spacing="8">
                     <Label Text="Gesamtbetrag (€)" FontSize="Medium"/>
                     <Entry Text="{Binding Betrag}"
                            Placeholder="Gesamtbetrag eingeben"
                            Keyboard="Numeric"
                            FontSize="Medium"
-                           IsEnabled="{Binding Source={x:Reference Name=AuftragstypPicker}, Path=SelectedItem, Converter={StaticResource IsPauschalConverter}}"/>
+                           ></Entry>
                 </VerticalStackLayout>
             </Border>
             <Button Text="Auftrag speichern"
