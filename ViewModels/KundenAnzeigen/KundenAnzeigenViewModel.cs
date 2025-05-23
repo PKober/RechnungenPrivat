@@ -29,6 +29,9 @@ namespace RechnungenPrivat.ViewModels.KundenAnzeigen
         [ObservableProperty]
         private Kunde _selectedKunde;
 
+        [ObservableProperty]
+        private bool _kundeGewählt = false;
+
         public async Task LoadKundenAsync()
         {
             IsRefreshing = true;
@@ -62,8 +65,10 @@ namespace RechnungenPrivat.ViewModels.KundenAnzeigen
 
             if (kundeFürAktion == null)
                 return;
+            KundeGewählt = true;
+            
+            //await Shell.Current.DisplayAlert("Ausgewählter Kunde", $"Name: {kundeFürAktion.KundenName}\nAdresse: {kundeFürAktion.KundenAdresse}", "OK");
 
-            await Shell.Current.DisplayAlert("Ausgewählter Kunde", $"Name: {kundeFürAktion.KundenName}\nAdresse: {kundeFürAktion.KundenAdresse}", "OK");
 
         }
 
@@ -74,6 +79,18 @@ namespace RechnungenPrivat.ViewModels.KundenAnzeigen
             {
                 await Shell.Current.DisplayAlert("Fehler", "Bitte wählen Sie zuerst einen Kunden aus", "Ok");
                 return; 
+            }
+
+            await _navigationService.NavigateToAsync($"{nameof(AuftragErstellenView)}?KundenId={SelectedKunde.Id}");
+        }
+
+        [RelayCommand]
+        private async Task AufträgeAnzeigenFuerKundenAsync()
+        {
+            if (SelectedKunde == null)
+            {
+                await Shell.Current.DisplayAlert("Fehler", "Bitte wählen Sie zuerst einen Kunden aus", "Ok");
+                return;
             }
 
             await _navigationService.NavigateToAsync($"{nameof(AuftragErstellenView)}?KundenId={SelectedKunde.Id}");

@@ -22,10 +22,8 @@ namespace RechnungenPrivat.Data.Interfaces
         Task<Auftrag> GetAuftragByNameAsync(string name);
         Task<int> DeleteAuftragByName(string auftragsname);
         Task<List<Auftrag>> GetAllAuftraegeByKundeIdAsync(int kundeId);
-
         Task<string> GetKundeByID(int id);
-
-
+        
 
     }
 }
