@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RechnungenPrivat.Views.AufträgeFürKundenAnzeigen.AufträgeFürKundenAnzeigenView"
+             xmlns:vm="clr-namespace:RechnungenPrivat.ViewModels.AufträgeFürKundenAnzeigenViewModel"
+             x:DataType="vm:AufträgeFürKundenAnzeigenViewModel"
+             xmlns:model="clr-namespace:RechnungenPrivat.Models" 
+             Title="Aufträge für Kunden anzeigen">
+    <Grid RowDefinitions="Auto, *">
+
+        <CollectionView Grid.Row="1"
+                ItemsSource="{Binding Aufträge }"
+                SelectionMode="Single"
+                EmptyView="Keine Kunden gefunden."
+                        SelectedItem="{Binding SelectedAutrag, Mode=TwoWay}" SelectionChangedCommand="{Binding GoToAufträgeDetailsCommand}">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"
+                           ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Auftrag">
+                    <Border
+                    StrokeThickness="1"
+                    Padding="15"
+                    Margin="10,0,10,0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="8"/>
+                        </Border.StrokeShape>
+                        <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Auftragsname}" FontSize="Medium" FontAttributes="Bold"/>
+                            
+                            <Label Grid.Row="2" Grid.Column="0" Text="{Binding Auftragsdatum}" />
+                            <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Source="chevron_right.png" HeightRequest="20" WidthRequest="20"
+                           VerticalOptions="Center"
+                           Aspect="AspectFit"
+                           IsVisible="{OnPlatform iOS=true, Android=true, Default=false}"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+        <VerticalStackLayout Padding="25">
+            <Button Text="Ausgewählten Auftrag Löschen"
+            Command="{Binding DeleteAuftragCommand}"
+            IsEnabled="{Binding AuftragGewählt}" Margin="10"/>
+
+        </VerticalStackLayout>
+    </Grid>
+
+</ContentPage>

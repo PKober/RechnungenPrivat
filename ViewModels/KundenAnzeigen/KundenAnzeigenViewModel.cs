@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using RechnungenPrivat.Data.Interfaces;
 using RechnungenPrivat.Models;
+using RechnungenPrivat.Views.AufträgeFürKundenAnzeigen;
 using RechnungenPrivat.Views.AuftragErstellen;
 using System.Collections.ObjectModel;
 
@@ -93,7 +94,7 @@ namespace RechnungenPrivat.ViewModels.KundenAnzeigen
                 return;
             }
 
-            await _navigationService.NavigateToAsync($"{nameof(AuftragErstellenView)}?KundenId={SelectedKunde.Id}");
+            await _navigationService.NavigateToAsync($"{nameof(AufträgeFürKundenAnzeigenView)}?KundenId={SelectedKunde.Id}");
         }
 
     }

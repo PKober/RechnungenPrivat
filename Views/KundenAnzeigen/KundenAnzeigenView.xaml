@@ -38,7 +38,7 @@
                         <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
                             <Label Grid.Row="0" Grid.Column="0" Text="{Binding KundenName}" FontSize="Medium" FontAttributes="Bold"/>
                             <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding KundenAdresse}" FontSize="Small" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}"/>
-
+                             
                             <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Source="chevron_right.png" HeightRequest="20" WidthRequest="20"
                                    VerticalOptions="Center"
                                    Aspect="AspectFit"

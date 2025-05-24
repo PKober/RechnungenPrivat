@@ -12,6 +12,10 @@ using RechnungenPrivat.Views.KundenAnzeigen;
 using RechnungenPrivat.Views.KundenLöschen;
 using RechnungenPrivat.Views.Startseite;
 using RechnungenPrivat.Views.AuftragErstellen;
+using RechnungenPrivat.ViewModels.AufträgeFürKundenAnzeigenViewModel;
+using RechnungenPrivat.Views.AufträgeFürKundenAnzeigen;
+using RechnungenPrivat.ViewModels.KundenStatistik;
+using RechnungenPrivat.Views.KundenStatistik;
 
 
 namespace RechnungenPrivat;
@@ -40,6 +44,8 @@ public static class MauiProgram
 		builder.Services.AddTransient<KundenLöschenViewModel>();
 		builder.Services.AddTransient<KundenAnzeigenViewModel>();
 		builder.Services.AddTransient<AuftragErstellenViewModel>();
+		builder.Services.AddTransient<AufträgeFürKundenAnzeigenViewModel>();
+        builder.Services.AddTransient<KundenStatistikView>();
 
         // Register the Views
         builder.Services.AddTransient<MainPage>();
@@ -47,6 +53,9 @@ public static class MauiProgram
 		builder.Services.AddTransient<KundenLöschenView>();
 		builder.Services.AddTransient<KundenAnzeigenView>();
 		builder.Services.AddTransient<AuftragErstellenView>();
+		builder.Services.AddTransient<AufträgeFürKundenAnzeigenView>();
+		builder.Services.AddTransient<KundenStatistikViewModel>();
+
 
 #if DEBUG
         builder.Logging.AddDebug();
