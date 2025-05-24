@@ -107,7 +107,7 @@ namespace RechnungenPrivat.ViewModels.AuftragErstellen
             if (result != 0)
             {
                 await Shell.Current.DisplayAlert("Erfolg", "Auftrag erfolgreich gespeichert.", "OK");
-                var route = $"///{nameof(MainPage)}";
+                var route = $"{nameof(MainPage)}";
                 await _navigationService.NavigateToAsync(route);
             }
             else

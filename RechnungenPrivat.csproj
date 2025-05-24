@@ -74,6 +74,9 @@
 	  <Compile Update="Views\AuftragErstellen\AuftragErstellenView.xaml.cs">
 	    <DependentUpon>AuftragErstellenView.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\AufträgeFürKundenAnzeigen\AufträgeFürKundenAnzeigenView.xaml.cs">
+	    <DependentUpon>AufträgeFürKundenAnzeigenView.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\KundenAnlegen\KundenAnlegenView.xaml.cs">
 	    <DependentUpon>KundenAnlegenView.xaml</DependentUpon>
 	  </Compile>
@@ -83,10 +86,16 @@
 	  <Compile Update="Views\KundenLöschen\KundenLöschenView.xaml.cs">
 	    <DependentUpon>KundenLöschenView.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\KundenStatistik\KundenStatistikView.xaml.cs">
+	    <DependentUpon>KundenStatistikView.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiXaml Update="Views\AuftragErstellen\AuftragErstellenView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\AufträgeFürKundenAnzeigen\AufträgeFürKundenAnzeigenView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\KundenAnlegen\KundenAnlegenView.xaml">
@@ -96,6 +105,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\KundenLöschen\KundenLöschenView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\KundenStatistik\KundenStatistikView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
