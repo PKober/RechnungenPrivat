@@ -1,11 +1,6 @@
 ﻿using RechnungenPrivat.Data.Interfaces;
 using RechnungenPrivat.Models;
 using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RechnungenPrivat.Data.Datenbank
 {
@@ -23,7 +18,7 @@ namespace RechnungenPrivat.Data.Datenbank
         {
             if (_database != null)
             {
-               return;
+                return;
             }
             _database = new SQLiteAsyncConnection(DbPath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache);
             await _database.CreateTableAsync<Kunde>();
@@ -120,7 +115,7 @@ namespace RechnungenPrivat.Data.Datenbank
             var kunde = await _database.Table<Kunde>().Where(k => k.Id == id).FirstOrDefaultAsync();
             if (kunde != null)
             {
-                return  kunde.KundenName; 
+                return kunde.KundenName;
             }
             else
             {

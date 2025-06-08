@@ -4,11 +4,6 @@ using RechnungenPrivat.Data.Interfaces;
 using RechnungenPrivat.Views.KundenAnlegen;
 using RechnungenPrivat.Views.KundenAnzeigen;
 using RechnungenPrivat.Views.KundenLöschen;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RechnungenPrivat.ViewModels.Startseite
 {

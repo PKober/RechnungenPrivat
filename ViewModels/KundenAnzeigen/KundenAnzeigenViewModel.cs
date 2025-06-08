@@ -4,6 +4,7 @@ using RechnungenPrivat.Data.Interfaces;
 using RechnungenPrivat.Models;
 using RechnungenPrivat.Views.AufträgeFürKundenAnzeigen;
 using RechnungenPrivat.Views.AuftragErstellen;
+using RechnungenPrivat.Views.KundenStatistik;
 using System.Collections.ObjectModel;
 
 
@@ -56,7 +57,7 @@ namespace RechnungenPrivat.ViewModels.KundenAnzeigen
 
             if (kundeParameter != null)
             {
-                
+
                 kundeFürAktion = kundeParameter;
             }
             else if (SelectedKunde != null)
@@ -67,7 +68,7 @@ namespace RechnungenPrivat.ViewModels.KundenAnzeigen
             if (kundeFürAktion == null)
                 return;
             KundeGewählt = true;
-            
+
             //await Shell.Current.DisplayAlert("Ausgewählter Kunde", $"Name: {kundeFürAktion.KundenName}\nAdresse: {kundeFürAktion.KundenAdresse}", "OK");
 
 
@@ -79,7 +80,7 @@ namespace RechnungenPrivat.ViewModels.KundenAnzeigen
             if (SelectedKunde == null)
             {
                 await Shell.Current.DisplayAlert("Fehler", "Bitte wählen Sie zuerst einen Kunden aus", "Ok");
-                return; 
+                return;
             }
 
             await _navigationService.NavigateToAsync($"{nameof(AuftragErstellenView)}?KundenId={SelectedKunde.Id}");
@@ -97,5 +98,20 @@ namespace RechnungenPrivat.ViewModels.KundenAnzeigen
             await _navigationService.NavigateToAsync($"{nameof(AufträgeFürKundenAnzeigenView)}?KundenId={SelectedKunde.Id}");
         }
 
+
+        [RelayCommand]
+        private async Task GotoStatistikAsync()
+        {
+            if (SelectedKunde == null)
+            {
+                await Shell.Current.DisplayAlert("Fehler", "Bitte wählen Sie zuerst einen Kunden aus", "Ok");
+                return;
+            }
+            else if (SelectedKunde != null)
+            {
+                await _navigationService.NavigateToAsync($"{nameof(KundenStatistikView)}?KundenId={SelectedKunde.Id}");
+            }
+
+        }
     }
 }

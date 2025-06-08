@@ -1,9 +1,4 @@
 ﻿using RechnungenPrivat.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RechnungenPrivat.Data.Interfaces
 {
@@ -23,7 +18,7 @@ namespace RechnungenPrivat.Data.Interfaces
         Task<int> DeleteAuftragByName(string auftragsname);
         Task<List<Auftrag>> GetAllAuftraegeByKundeIdAsync(int kundeId);
         Task<string> GetKundeByID(int id);
-        
+
 
     }
 }
