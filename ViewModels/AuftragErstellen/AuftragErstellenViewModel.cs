@@ -3,26 +3,20 @@ using CommunityToolkit.Mvvm.Input;
 using RechnungenPrivat.Data.Interfaces;
 using RechnungenPrivat.Models;
 using RechnungenPrivat.Views.Startseite;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RechnungenPrivat.ViewModels.AuftragErstellen
 {
-    [QueryProperty(nameof(KundenId),"KundenId")]
+    [QueryProperty(nameof(KundenId), "KundenId")]
     public partial class AuftragErstellenViewModel : ObservableObject
     {
         private readonly IDatabaseService _databaseService;
         private readonly INavigationService _navigationService;
 
-        public AuftragErstellenViewModel(IDatabaseService databaseService,INavigationService navigationService)
+        public AuftragErstellenViewModel(IDatabaseService databaseService, INavigationService navigationService)
         {
             _databaseService = databaseService;
             _navigationService = navigationService;
-          
+
 
         }
 
@@ -56,14 +50,14 @@ namespace RechnungenPrivat.ViewModels.AuftragErstellen
         [ObservableProperty]
         private string _kundenNamen;
 
-        
 
-         partial void OnKundenIdChanged(int value)
+
+        partial void OnKundenIdChanged(int value)
         {
             _ = LoadKundenDetailsAsync(value);
         }
 
-        private async Task LoadKundenDetailsAsync(int kundenID  )
+        private async Task LoadKundenDetailsAsync(int kundenID)
         {
             var kunde = await _databaseService.GetKundeByIdAsync(kundenID);
 
@@ -91,7 +85,7 @@ namespace RechnungenPrivat.ViewModels.AuftragErstellen
                 await Shell.Current.DisplayAlert("Fehler", "Bitte geben Sie sowohl den Auftragsnamen als auch die Beschreibung ein.", "OK");
                 return;
             }
-            
+
             var auftrag = new Auftrag
             {
                 Auftragsname = this.Auftragsname,

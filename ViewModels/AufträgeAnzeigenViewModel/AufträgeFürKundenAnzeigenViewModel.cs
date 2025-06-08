@@ -2,12 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using RechnungenPrivat.Data.Interfaces;
 using RechnungenPrivat.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RechnungenPrivat.ViewModels.AufträgeFürKundenAnzeigenViewModel
 {
@@ -77,8 +72,8 @@ namespace RechnungenPrivat.ViewModels.AufträgeFürKundenAnzeigenViewModel
                 return;
             AuftragGewählt = true;
 
-           // await Shell.Current.DisplayAlert("Ausgewählter Auftrag",
-           //     $"Name: {auftragFürAktion.Auftragsname}\nBeschreibung: {auftragFürAktion.Beschreibung}", "OK");
+            // await Shell.Current.DisplayAlert("Ausgewählter Auftrag",
+            //     $"Name: {auftragFürAktion.Auftragsname}\nBeschreibung: {auftragFürAktion.Beschreibung}", "OK");
 
         }
 

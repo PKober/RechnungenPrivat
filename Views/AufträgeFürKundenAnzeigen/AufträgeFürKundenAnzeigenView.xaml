@@ -5,6 +5,7 @@
              xmlns:vm="clr-namespace:RechnungenPrivat.ViewModels.AufträgeFürKundenAnzeigenViewModel"
              x:DataType="vm:AufträgeFürKundenAnzeigenViewModel"
              xmlns:model="clr-namespace:RechnungenPrivat.Models" 
+
              Title="Aufträge für Kunden anzeigen">
     <Grid RowDefinitions="Auto, *">
 
@@ -30,24 +31,18 @@
                         </Border.StrokeShape>
                         <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
                             <Label Grid.Row="0" Grid.Column="0" Text="{Binding Auftragsname}" FontSize="Medium" FontAttributes="Bold"/>
-                            
+                            <Button Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AufträgeFürKundenAnzeigenViewModel}},Path=DeleteAuftragCommand}" Grid.Row="0"  Grid.RowSpan="2" VerticalOptions="Center" Grid.Column="2" WidthRequest="30" Text="Löschen">
+                                
+                            </Button>
                             <Label Grid.Row="2" Grid.Column="0" Text="{Binding Auftragsdatum}" />
-                            <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Source="chevron_right.png" HeightRequest="20" WidthRequest="20"
-                           VerticalOptions="Center"
-                           Aspect="AspectFit"
-                           IsVisible="{OnPlatform iOS=true, Android=true, Default=false}"/>
+
                         </Grid>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
 
         </CollectionView>
-        <VerticalStackLayout Padding="25">
-            <Button Text="Ausgewählten Auftrag Löschen"
-            Command="{Binding DeleteAuftragCommand}"
-            IsEnabled="{Binding AuftragGewählt}" Margin="10"/>
 
-        </VerticalStackLayout>
     </Grid>
 
 </ContentPage>

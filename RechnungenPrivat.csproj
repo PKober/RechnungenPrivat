@@ -61,6 +61,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui.Core" Version="11.2.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
@@ -89,6 +90,9 @@
 	  <Compile Update="Views\KundenStatistik\KundenStatistikView.xaml.cs">
 	    <DependentUpon>KundenStatistikView.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\KundenStatistik\KundenStatistikView.xaml.cs">
+	    <DependentUpon>KundenStatistikView.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -105,6 +109,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\KundenLöschen\KundenLöschenView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\KundenStatistik\KundenStatistikView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\KundenStatistik\KundenStatistikView.xaml">

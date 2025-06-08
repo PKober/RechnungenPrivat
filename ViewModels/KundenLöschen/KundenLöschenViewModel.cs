@@ -1,14 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using RechnungenPrivat.Data.Interfaces;
-using RechnungenPrivat.Models;
 
 
 namespace RechnungenPrivat.ViewModels.KundenLöschen
 {
     public partial class KundenLöschenViewModel : ObservableObject
     {
-        
+
         private readonly INavigationService _navigationService;
         private readonly IDatabaseService _databaseService;
         public KundenLöschenViewModel(INavigationService navigationService, IDatabaseService databaseService)
@@ -28,7 +27,7 @@ namespace RechnungenPrivat.ViewModels.KundenLöschen
         [RelayCommand]
         public async Task LöscheKundeAsync()
         {
-            if (string.IsNullOrWhiteSpace(Kundenname) )
+            if (string.IsNullOrWhiteSpace(Kundenname))
             {
                 await Shell.Current.DisplayAlert("Fehler", "Bitte geben Sie sowohl den Kundennamen als auch die Adresse ein.", "OK");
                 return;

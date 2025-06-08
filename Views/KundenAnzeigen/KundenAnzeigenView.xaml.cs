@@ -4,11 +4,11 @@ namespace RechnungenPrivat.Views.KundenAnzeigen;
 
 public partial class KundenAnzeigenView : ContentPage
 {
-	private readonly KundenAnzeigenViewModel _viewModel;
+    private readonly KundenAnzeigenViewModel _viewModel;
     public KundenAnzeigenView(KundenAnzeigenViewModel viewModel)
-	{
+    {
 
-		InitializeComponent();
+        InitializeComponent();
         BindingContext = viewModel;
         viewModel.LoadKundenAsync();
         _viewModel = viewModel;

@@ -27,22 +27,6 @@
             </VerticalStackLayout>
         </Border>
 
-        <Border 
-                    StrokeThickness="1"
-                    Padding="12"
-                    Margin="0,0,0,10">
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="8"/>
-            </Border.StrokeShape>
-            <VerticalStackLayout Spacing="8">
-                <Label Text="Kundenadresse" FontSize="Medium" />
-                <Editor Text="{Binding Kundenadresse}"
-                            Placeholder="Adresse des Kunden eingeben"
-                            AutoSize="TextChanges"
-                            FontSize="Medium"
-                            HeightRequest="120"/>
-            </VerticalStackLayout>
-        </Border>
 
         <Button Text="Löschen"
                     Command="{Binding LöscheKundeCommand }" 
@@ -58,6 +42,9 @@
                 </OnPlatform>
             </Button.CornerRadius>
         </Button>
+        <CollectionView >
+            
+        </CollectionView>
 
     </VerticalStackLayout>
 </ContentPage>

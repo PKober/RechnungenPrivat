@@ -9,7 +9,7 @@ namespace RechnungenPrivat.ViewModels.KundenAnlegen
 {
     public partial class KundenAnlegenViewModel : ObservableObject
     {
-        
+
         private readonly INavigationService _navigationService;
         private readonly IDatabaseService _databaseService;
 
@@ -57,7 +57,7 @@ namespace RechnungenPrivat.ViewModels.KundenAnlegen
             else
             {
                 await Shell.Current.DisplayAlert("Fehler", "Fehler beim Speichern des Kunden.", "OK");
-               
+
             }
         }
     }
