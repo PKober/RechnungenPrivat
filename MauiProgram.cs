@@ -1,6 +1,8 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CommunityToolkit.Maui.Core;
+using Microsoft.Extensions.Logging;
 using RechnungenPrivat.Data.Datenbank;
 using RechnungenPrivat.Data.Interfaces;
+using RechnungenPrivat.Data.Services;
 using RechnungenPrivat.Navigation;
 using RechnungenPrivat.ViewModels.AufträgeFürKundenAnzeigenViewModel;
 using RechnungenPrivat.ViewModels.AuftragErstellen;
@@ -27,6 +29,7 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
+            .UseMauiCommunityToolkitCore()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -37,6 +40,9 @@ public static class MauiProgram
 
         // Register the navigation service
         builder.Services.AddSingleton<INavigationService, MauiNavigationService>();
+
+        // Register the Excel Export Service
+        builder.Services.AddSingleton<IExcelExportService, ExcelExportService>();
 
         // Register the ViewModels
         builder.Services.AddTransient<MainPageViewModel>();

@@ -4,6 +4,10 @@ using RechnungenPrivat.Data.Interfaces;
 using RechnungenPrivat.Models;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using CommunityToolkit.Maui.Storage;
+using ClosedXML.Excel;
+using System.IO;
+
 
 namespace RechnungenPrivat.ViewModels.KundenStatistik
 {
@@ -13,11 +17,13 @@ namespace RechnungenPrivat.ViewModels.KundenStatistik
 
         private readonly IDatabaseService _databaseService;
         private readonly INavigationService _navigationService;
+        private readonly IExcelExportService _excelExportService;
 
-        public KundenStatistikViewModel(IDatabaseService databaseService, INavigationService navigationService)
+        public KundenStatistikViewModel(IDatabaseService databaseService, INavigationService navigationService,IExcelExportService excelExportService)
         {
             _databaseService = databaseService;
             _navigationService = navigationService;
+            _excelExportService = excelExportService;
             Aufträge = new ObservableCollection<Auftrag>();
             
 
@@ -37,6 +43,7 @@ namespace RechnungenPrivat.ViewModels.KundenStatistik
         private decimal _durchschnittStunden;
         [ObservableProperty]
         private ObservableCollection<Auftrag> _aufträge;
+
         [ObservableProperty]
         private ObservableCollection<Auftrag> _gefilterteAufträge = new();
 
@@ -47,8 +54,9 @@ namespace RechnungenPrivat.ViewModels.KundenStatistik
         private int? _selectedJahr;
 
         [ObservableProperty]
-        // [NotifyCanExecuteChangedFor(nameof())]
+        [NotifyCanExecuteChangedFor(nameof(ExportToExcelCommand))]
         private MonatItem _selectedMonatItem;
+        
 
         public ObservableCollection<int?> Jahre { get; } = new();
         
@@ -85,7 +93,7 @@ namespace RechnungenPrivat.ViewModels.KundenStatistik
                 DurchschnittBetrag = GesamtBetrag / Aufträge.Count - 1;
                 
                 AnzahlAufträge = Aufträge.Count;
-
+                ApplyFilter();
             }
         }
         public async Task LoadKundenDetailsAsync(int kundenId)
@@ -141,7 +149,7 @@ namespace RechnungenPrivat.ViewModels.KundenStatistik
 
             IEnumerable<Auftrag> tempGefilterteAufträge = Aufträge;
 
-            if (SelectedJahr.HasValue)
+            if (SelectedJahr.HasValue )
             {
                 tempGefilterteAufträge = tempGefilterteAufträge.Where(a => a.Auftragsdatum.HasValue && a.Auftragsdatum.Value.Year == SelectedJahr.Value);
             }
@@ -157,5 +165,37 @@ namespace RechnungenPrivat.ViewModels.KundenStatistik
                 GefilterteAufträge.Add(auftrag);
             }
         }
+
+        private bool CanExportToExcel()
+        {
+            return GefilterteAufträge.Any();
+        }
+
+        [RelayCommand(CanExecute = nameof(CanExportToExcel))]
+        private async Task ExportToExcelAsync(CancellationToken cancellationToken)
+        {
+            if (!CanExportToExcel()) return;
+
+            try
+            {
+                var worksheetTitle = $"Aufträge für {KundenName}";
+                byte[] exceldata = _excelExportService.CreateAuftragsExcelStream(GefilterteAufträge, worksheetTitle);
+
+                using var stream = new MemoryStream(exceldata);
+
+                var fileName = $"Statistik_{KundenName}_{KundenId}.{DateTime.Today.Month.ToString()}.xlsx";
+                var fileSaverResult = await FileSaver.Default.SaveAsync(fileName, stream, cancellationToken);
+                if (!fileSaverResult.IsSuccessful)
+                {
+                    await Shell.Current.DisplayAlert("Fehler", $"Die Datei konnte nicht gespeichert werden: {fileSaverResult.Exception.Message}", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await Shell.Current.DisplayAlert("Fehler", $"Ein unerwarteter Fehler ist aufgetreten: {ex.Message}", "OK");
+            }
+        }
     }
 }
+
+

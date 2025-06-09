@@ -91,5 +91,11 @@
                 <Label Text="Keine Aufträge für die ausgewählten Filter gefunden." HorizontalOptions="Center" VerticalOptions="Center"/>
             </CollectionView.EmptyView>
         </CollectionView>
+        <Button Text="Als Excel exportieren"
+                Command="{Binding ExportToExcelCommand}"
+                HorizontalOptions="End"
+                Margin="0,0,10,10" />
+
+ 
     </VerticalStackLayout>
 </ContentPage>
