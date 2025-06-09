@@ -41,7 +41,7 @@ namespace RechnungenPrivat.ViewModels.KundenStatistik
         private decimal _durchschnittStunden;
         [ObservableProperty]
         private ObservableCollection<Auftrag> _aufträge;
-        //[NotifyCanExecuteChangedFor(nameof())]
+
         [ObservableProperty]
         private ObservableCollection<Auftrag> _gefilterteAufträge = new();
 
