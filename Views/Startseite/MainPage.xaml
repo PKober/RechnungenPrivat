@@ -42,6 +42,13 @@
                 Text="Go To Kunden liste anzeigen"
                 Command="{Binding GoToKundenAnzeigenCommand}"
                 />
+
+            <Button Text="Wetter abrufen" Clicked="OnGetWeatherClicked" />
+
+            <Label x:Name="CityLabel" FontSize="24" FontAttributes="Bold" />
+            <Label x:Name="TempLabel" FontSize="20" />
+            <Label x:Name="DescLabel" FontSize="16" />
+            <Image x:Name="WeatherIcon" WidthRequest="100" HeightRequest="100" />
         </VerticalStackLayout>
     </ScrollView>
 
