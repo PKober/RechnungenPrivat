@@ -12,6 +12,8 @@ namespace RechnungenPrivat.Views.Startseite
             InitializeComponent();
             BindingContext = mainPageViewModel;
         }
+      
+
 
     }
 

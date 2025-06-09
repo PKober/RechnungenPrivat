@@ -85,7 +85,7 @@ namespace RechnungenPrivat.ViewModels.KundenStatistik
                 DurchschnittBetrag = GesamtBetrag / Aufträge.Count - 1;
                 
                 AnzahlAufträge = Aufträge.Count;
-
+                ApplyFilter();
             }
         }
         public async Task LoadKundenDetailsAsync(int kundenId)
@@ -141,7 +141,7 @@ namespace RechnungenPrivat.ViewModels.KundenStatistik
 
             IEnumerable<Auftrag> tempGefilterteAufträge = Aufträge;
 
-            if (SelectedJahr.HasValue)
+            if (SelectedJahr.HasValue )
             {
                 tempGefilterteAufträge = tempGefilterteAufträge.Where(a => a.Auftragsdatum.HasValue && a.Auftragsdatum.Value.Year == SelectedJahr.Value);
             }
