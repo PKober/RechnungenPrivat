@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CommunityToolkit.Maui.Core;
+using Microsoft.Extensions.Logging;
 using RechnungenPrivat.Data.Datenbank;
 using RechnungenPrivat.Data.Interfaces;
 using RechnungenPrivat.Navigation;
@@ -27,6 +28,7 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
+            .UseMauiCommunityToolkitCore()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
