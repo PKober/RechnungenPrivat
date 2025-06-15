@@ -19,6 +19,11 @@ namespace RechnungenPrivat.Data.Interfaces
         Task<List<Auftrag>> GetAllAuftraegeByKundeIdAsync(int kundeId);
         Task<string> GetKundeByID(int id);
 
-
+        #region Ausgabe Methoden
+        Task<List<Ausgabe>> GetAusgabenAsync();
+        Task<Ausgabe> GetAusgabeByIdAsync(int id);
+        Task<int> SaveAusgabeAsync(Ausgabe ausgabe);
+        Task<int> DeleteAusgabeAsync(Ausgabe ausgabe);
+        #endregion
     }
 }
