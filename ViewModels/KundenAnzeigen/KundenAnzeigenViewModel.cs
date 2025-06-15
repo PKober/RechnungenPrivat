@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using RechnungenPrivat.Data.Interfaces;
+using RechnungenPrivat.Data.Services;
 using RechnungenPrivat.Models;
 using RechnungenPrivat.Views.AufträgeFürKundenAnzeigen;
 using RechnungenPrivat.Views.AuftragErstellen;
@@ -14,12 +15,15 @@ namespace RechnungenPrivat.ViewModels.KundenAnzeigen
     {
         private readonly INavigationService _navigationService;
         private readonly IDatabaseService _databaseService;
+        private readonly IDialogService _dialogService;
 
-        public KundenAnzeigenViewModel(INavigationService navigationService, IDatabaseService databaseService)
+        public KundenAnzeigenViewModel(INavigationService navigationService, IDatabaseService databaseService, IDialogService dialogService)
         {
             _navigationService = navigationService;
             _databaseService = databaseService;
-            Kunden = new ObservableCollection<Kunde>();
+            _dialogService = dialogService;
+        
+        Kunden = new ObservableCollection<Kunde>();
         }
 
         [ObservableProperty]
@@ -79,7 +83,7 @@ namespace RechnungenPrivat.ViewModels.KundenAnzeigen
         {
             if (SelectedKunde == null)
             {
-                await Shell.Current.DisplayAlert("Fehler", "Bitte wählen Sie zuerst einen Kunden aus", "Ok");
+                await _dialogService.DisplayAlert("Fehler", "Bitte wählen Sie zuerst einen Kunden aus", "Ok");
                 return;
             }
 
@@ -91,7 +95,7 @@ namespace RechnungenPrivat.ViewModels.KundenAnzeigen
         {
             if (SelectedKunde == null)
             {
-                await Shell.Current.DisplayAlert("Fehler", "Bitte wählen Sie zuerst einen Kunden aus", "Ok");
+                await _dialogService.DisplayAlert("Fehler", "Bitte wählen Sie zuerst einen Kunden aus", "Ok");
                 return;
             }
 
@@ -104,7 +108,7 @@ namespace RechnungenPrivat.ViewModels.KundenAnzeigen
         {
             if (SelectedKunde == null)
             {
-                await Shell.Current.DisplayAlert("Fehler", "Bitte wählen Sie zuerst einen Kunden aus", "Ok");
+                await _dialogService.DisplayAlert("Fehler", "Bitte wählen Sie zuerst einen Kunden aus", "Ok");
                 return;
             }
             else if (SelectedKunde != null)

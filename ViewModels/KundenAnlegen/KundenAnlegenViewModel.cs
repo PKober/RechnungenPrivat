@@ -12,11 +12,13 @@ namespace RechnungenPrivat.ViewModels.KundenAnlegen
 
         private readonly INavigationService _navigationService;
         private readonly IDatabaseService _databaseService;
+        private readonly IDialogService _dialogService;
 
-        public KundenAnlegenViewModel(INavigationService navigationService, IDatabaseService databaseService)
+        public KundenAnlegenViewModel(INavigationService navigationService, IDatabaseService databaseService,IDialogService dialogService)
         {
             _navigationService = navigationService;
             _databaseService = databaseService;
+            _dialogService = dialogService;
         }
 
         [ObservableProperty]
@@ -32,7 +34,7 @@ namespace RechnungenPrivat.ViewModels.KundenAnlegen
         {
             if (string.IsNullOrWhiteSpace(Kundenname) || string.IsNullOrWhiteSpace(Kundenadresse))
             {
-                await Shell.Current.DisplayAlert("Fehler", "Bitte geben Sie sowohl den Kundennamen als auch die Adresse ein.", "OK");
+                await _dialogService.DisplayAlert("Fehler", "Bitte geben Sie sowohl den Kundennamen als auch die Adresse ein.", "OK");
                 return;
             }
             var kunde = new Kunde
@@ -44,19 +46,19 @@ namespace RechnungenPrivat.ViewModels.KundenAnlegen
 
             if (kundeCheck != null)
             {
-                await Shell.Current.DisplayAlert("Fehler", "Kunde bereits vorhanden", "OK");
+                await _dialogService.DisplayAlert("Fehler", "Kunde bereits vorhanden", "OK");
                 return;
             }
             int result = await _databaseService.SaveKundeAsync(kunde);
 
             if (result != 0)
             {
-                await Shell.Current.DisplayAlert("Erfolg", "Kunde erfolgreich gespeichert.", "OK");
+                await _dialogService.DisplayAlert("Erfolg", "Kunde erfolgreich gespeichert.", "OK");
                 await _navigationService.GoBackAsync();
             }
             else
             {
-                await Shell.Current.DisplayAlert("Fehler", "Fehler beim Speichern des Kunden.", "OK");
+                await _dialogService.DisplayAlert("Fehler", "Fehler beim Speichern des Kunden.", "OK");
 
             }
         }

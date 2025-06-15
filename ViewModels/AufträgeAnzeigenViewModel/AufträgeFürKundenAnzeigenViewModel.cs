@@ -12,11 +12,13 @@ namespace RechnungenPrivat.ViewModels.AufträgeFürKundenAnzeigenViewModel
 
         private readonly INavigationService _navigationService;
         private readonly IDatabaseService _databaseService;
+        private readonly IDialogService _dialogService;
 
-        public AufträgeFürKundenAnzeigenViewModel(INavigationService navigationService, IDatabaseService databaseService)
+        public AufträgeFürKundenAnzeigenViewModel(INavigationService navigationService, IDatabaseService databaseService, IDialogService dialogService)
         {
             _navigationService = navigationService;
             _databaseService = databaseService;
+            _dialogService = dialogService;
             Aufträge = new ObservableCollection<Auftrag>();
         }
         [ObservableProperty]
@@ -82,7 +84,7 @@ namespace RechnungenPrivat.ViewModels.AufträgeFürKundenAnzeigenViewModel
         {
             if (SelectedAutrag == null)
             {
-                await Shell.Current.DisplayAlert("Fehler", "Bitte wählen Sie einen Auftrag zum Löschen aus.", "OK");
+                await _dialogService.DisplayAlert("Fehler", "Bitte wählen Sie einen Auftrag zum Löschen aus", "OK");
                 return;
             }
             var result = await Shell.Current.DisplayAlert("Bestätigung",

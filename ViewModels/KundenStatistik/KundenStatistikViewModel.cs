@@ -18,12 +18,14 @@ namespace RechnungenPrivat.ViewModels.KundenStatistik
         private readonly IDatabaseService _databaseService;
         private readonly INavigationService _navigationService;
         private readonly IExcelExportService _excelExportService;
+        private readonly IDialogService _dialogService;
 
-        public KundenStatistikViewModel(IDatabaseService databaseService, INavigationService navigationService,IExcelExportService excelExportService)
+        public KundenStatistikViewModel(IDatabaseService databaseService, INavigationService navigationService,IExcelExportService excelExportService,IDialogService dialogService)
         {
             _databaseService = databaseService;
             _navigationService = navigationService;
             _excelExportService = excelExportService;
+            _dialogService = dialogService;
             Aufträge = new ObservableCollection<Auftrag>();
             
 
@@ -187,12 +189,12 @@ namespace RechnungenPrivat.ViewModels.KundenStatistik
                 var fileSaverResult = await FileSaver.Default.SaveAsync(fileName, stream, cancellationToken);
                 if (!fileSaverResult.IsSuccessful)
                 {
-                    await Shell.Current.DisplayAlert("Fehler", $"Die Datei konnte nicht gespeichert werden: {fileSaverResult.Exception.Message}", "OK");
+                    await _dialogService.DisplayAlert("Fehler", $"Die Datei konnte nicht gespeichert werden: {fileSaverResult.Exception.Message}", "OK");
                 }
             }
             catch (Exception ex)
             {
-                await Shell.Current.DisplayAlert("Fehler", $"Ein unerwarteter Fehler ist aufgetreten: {ex.Message}", "OK");
+                await _dialogService.DisplayAlert("Fehler", $"Ein unerwarteter Fehler ist aufgetreten: {ex.Message}", "OK");
             }
         }
     }

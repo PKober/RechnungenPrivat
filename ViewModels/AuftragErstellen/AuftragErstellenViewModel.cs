@@ -11,11 +11,13 @@ namespace RechnungenPrivat.ViewModels.AuftragErstellen
     {
         private readonly IDatabaseService _databaseService;
         private readonly INavigationService _navigationService;
+        private readonly IDialogService _dialogService;
 
-        public AuftragErstellenViewModel(IDatabaseService databaseService, INavigationService navigationService)
+        public AuftragErstellenViewModel(IDatabaseService databaseService, INavigationService navigationService,IDialogService dialogService)
         {
             _databaseService = databaseService;
             _navigationService = navigationService;
+            _dialogService = dialogService;
 
 
         }
@@ -82,7 +84,7 @@ namespace RechnungenPrivat.ViewModels.AuftragErstellen
         {
             if (string.IsNullOrWhiteSpace(Auftragsname) || string.IsNullOrWhiteSpace(Auftragsbeschreibung))
             {
-                await Shell.Current.DisplayAlert("Fehler", "Bitte geben Sie sowohl den Auftragsnamen als auch die Beschreibung ein.", "OK");
+                await _dialogService.DisplayAlert("Fehler", "Bitte geben Sie sowohl den Auftragsnamen als auch die Beschreibung ein.", "OK");
                 return;
             }
 
@@ -100,13 +102,13 @@ namespace RechnungenPrivat.ViewModels.AuftragErstellen
             int result = await _databaseService.SaveAuftragAsync(auftrag);
             if (result != 0)
             {
-                await Shell.Current.DisplayAlert("Erfolg", "Auftrag erfolgreich gespeichert.", "OK");
+                await _dialogService.DisplayAlert("Erfolg", "Auftrag erfolgreich gespeichert.", "OK");
                 var route = $"{nameof(MainPage)}";
                 await _navigationService.NavigateToAsync(route);
             }
             else
             {
-                await Shell.Current.DisplayAlert("Fehler", "Fehler beim Speichern des Auftrags.", "OK");
+                await _dialogService.DisplayAlert("Fehler", "Fehler beim Speichern des Auftrags.", "OK");
             }
         }
 

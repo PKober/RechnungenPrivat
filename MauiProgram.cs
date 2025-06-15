@@ -35,6 +35,10 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
+
+        // Register the Dialog Service 
+        builder.Services.AddSingleton<IDialogService, DialogService>();
+
         // Register the database service
         builder.Services.AddSingleton<IDatabaseService, DatabaseService>();
 
