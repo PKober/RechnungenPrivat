@@ -35,11 +35,15 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
+
+        // Register the Dialog Service 
+        builder.Services.AddSingleton<IDialogService, DialogService>();
+
         // Register the database service
         builder.Services.AddSingleton<IDatabaseService, DatabaseService>();
 
         // Register the navigation service
-        builder.Services.AddSingleton<INavigationService, MauiNavigationService>();
+        builder.Services.AddSingleton<INavigationService>(provider => new MauiNavigationService(provider));
 
         // Register the Excel Export Service
         builder.Services.AddSingleton<IExcelExportService, ExcelExportService>();
