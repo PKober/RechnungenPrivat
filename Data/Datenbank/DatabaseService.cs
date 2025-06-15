@@ -237,7 +237,6 @@ namespace RechnungenPrivat.Data.Datenbank
             return await _database.Table<Kunde>().Where(k => k.Id == auftragId).ToListAsync();
         }
         #endregion
-
         #region Ausgabe Methoden 
 
         /// <summary>

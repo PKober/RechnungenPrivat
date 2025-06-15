@@ -48,6 +48,9 @@ public static class MauiProgram
         // Register the Excel Export Service
         builder.Services.AddSingleton<IExcelExportService, ExcelExportService>();
 
+        // Register the Media Serice 
+        builder.Services.AddSingleton<IMediaService, MediaService>();
+
         // Register the ViewModels
         builder.Services.AddTransient<MainPageViewModel>();
         builder.Services.AddTransient<KundenAnlegenViewModel>();
