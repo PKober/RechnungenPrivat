@@ -43,7 +43,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<IDatabaseService, DatabaseService>();
 
         // Register the navigation service
-        builder.Services.AddSingleton<INavigationService, MauiNavigationService>();
+        builder.Services.AddSingleton<INavigationService>(provider => new MauiNavigationService(provider));
 
         // Register the Excel Export Service
         builder.Services.AddSingleton<IExcelExportService, ExcelExportService>();

@@ -11,7 +11,7 @@ using System.Collections.ObjectModel;
 
 namespace RechnungenPrivat.ViewModels.KundenAnzeigen
 {
-    public partial class KundenAnzeigenViewModel : ObservableObject
+    public partial class KundenAnzeigenViewModel : BaseViewModel
     {
         private readonly INavigationService _navigationService;
         private readonly IDatabaseService _databaseService;
@@ -29,8 +29,8 @@ namespace RechnungenPrivat.ViewModels.KundenAnzeigen
         [ObservableProperty]
         private ObservableCollection<Kunde> _kunden;
 
-        [ObservableProperty]
-        private bool _isRefreshing;
+        //[ObservableProperty]
+        //private bool _isRefreshing;
 
         [ObservableProperty]
         private Kunde _selectedKunde;
@@ -38,9 +38,17 @@ namespace RechnungenPrivat.ViewModels.KundenAnzeigen
         [ObservableProperty]
         private bool _kundeGewählt = false;
 
+        public override async Task InitializeAsync(object? parameter = null)
+        {
+            await LoadKundenAsync();
+        }
+
         public async Task LoadKundenAsync()
         {
-            IsRefreshing = true;
+            if (IsBusy) return;
+            try
+            {
+                IsBusy = true;
             var kundenListe = await _databaseService.GetAllKundenAsync();
             if (kundenListe != null)
             {
@@ -50,7 +58,15 @@ namespace RechnungenPrivat.ViewModels.KundenAnzeigen
                     Kunden.Add(kunde);
                 }
             }
-            IsRefreshing = false;
+            }catch(Exception ex)
+            {
+                await _dialogService.DisplayAlert("Fehler", $"Ein Fehler ist beim Laden der Kunden aufgetreten: {ex.Message}", "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+
         }
 
         [RelayCommand]
