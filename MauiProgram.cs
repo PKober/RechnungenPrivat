@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui.Core;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using RechnungenPrivat.Data.Datenbank;
 using RechnungenPrivat.Data.Interfaces;
@@ -6,6 +7,8 @@ using RechnungenPrivat.Data.Services;
 using RechnungenPrivat.Navigation;
 using RechnungenPrivat.ViewModels.AufträgeFürKundenAnzeigenViewModel;
 using RechnungenPrivat.ViewModels.AuftragErstellen;
+using RechnungenPrivat.ViewModels.AusgabeAnlegen;
+using RechnungenPrivat.ViewModels.AusgabenAnzeigen;
 using RechnungenPrivat.ViewModels.KundenAnlegen;
 using RechnungenPrivat.ViewModels.KundenAnzeigen;
 using RechnungenPrivat.ViewModels.KundenLöschen;
@@ -13,6 +16,8 @@ using RechnungenPrivat.ViewModels.KundenStatistik;
 using RechnungenPrivat.ViewModels.Startseite;
 using RechnungenPrivat.Views.AufträgeFürKundenAnzeigen;
 using RechnungenPrivat.Views.AuftragErstellen;
+using RechnungenPrivat.Views.AusgabeAnlegen;
+using RechnungenPrivat.Views.AusgabenAnzeigen;
 using RechnungenPrivat.Views.KundenAnlegen;
 using RechnungenPrivat.Views.KundenAnzeigen;
 using RechnungenPrivat.Views.KundenLöschen;
@@ -58,7 +63,9 @@ public static class MauiProgram
         builder.Services.AddTransient<KundenAnzeigenViewModel>();
         builder.Services.AddTransient<AuftragErstellenViewModel>();
         builder.Services.AddTransient<AufträgeFürKundenAnzeigenViewModel>();
-        builder.Services.AddTransient<KundenStatistikView>();
+        builder.Services.AddTransient<KundenStatistikViewModel>();
+        builder.Services.AddTransient<AusgabeAnlegenViewModel>();
+        builder.Services.AddTransient<AusgabenAnzeigenViewModel>();
 
         // Register the Views
         builder.Services.AddTransient<MainPage>();
@@ -67,7 +74,9 @@ public static class MauiProgram
         builder.Services.AddTransient<KundenAnzeigenView>();
         builder.Services.AddTransient<AuftragErstellenView>();
         builder.Services.AddTransient<AufträgeFürKundenAnzeigenView>();
-        builder.Services.AddTransient<KundenStatistikViewModel>();
+        builder.Services.AddTransient<KundenStatistikView>();
+        builder.Services.AddTransient<AusgabeAnlegenView>();
+        builder.Services.AddTransient<AusgabenAnzeigenView>();
 
 
 #if DEBUG
