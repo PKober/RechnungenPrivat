@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:RechnungenPrivat.Models"
              xmlns:viewmodels="clr-namespace:RechnungenPrivat.ViewModels.AusgabenAnzeigen"
+             xmlns:converters="clr-namespace:RechnungenPrivat.Converters"
              x:DataType="viewmodels:AusgabenAnzeigenViewModel"
+             
              x:Class="RechnungenPrivat.Views.AusgabenAnzeigen.AusgabenAnzeigenView"
+             x:Name="ThisPage"
              Title="Ausgaben">
-
+    <ContentPage.Resources >
+        <converters:SelectedItemEventArgsConverter x:Key="SelectedItemEventArgsConverter"/>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Hinzufügen" Command="{Binding GoToAusgabenAnlegenCommand}"/>
     </ContentPage.ToolbarItems>
@@ -20,16 +26,20 @@
             
         </Label>
 
-        <CollectionView ItemsSource="{Binding Ausgaben}" IsVisible="{Binding ShowAusgabenList}">
+        <CollectionView ItemsSource="{Binding Ausgaben}" IsVisible="{Binding ShowAusgabenList}" SelectionMode="Single">
+                        <CollectionView.Behaviors>
+
+                        </CollectionView.Behaviors>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Ausgabe">
-                    <Frame Padding="10" Margin="10,5" CornerRadius="8" BorderColor="LightGray">
+                    <Border Padding="10" Margin="10,5" >
                         <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto">
                             <Label Grid.Row="0" Grid.Column="0" Text="{Binding Bezeichnung}" FontSize="Medium" FontAttributes="Bold" />
                             <Label Grid.Row="0" Grid.Column="1" Text="{Binding Betrag, StringFormat='{0:C}'}" FontSize="Medium" FontAttributes="Bold" TextColor="DarkRed" />
                             <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Datum, StringFormat='{0:d}'}" FontSize="Small" TextColor="Gray" />
-                        </Grid>
-                    </Frame>
+                            <Button Grid.Row="0" Grid.Column="2" Text="Löschen" Command="{Binding Source={x:Reference ThisPage},Path=BindingContext.DeleteAusgabeCommand}" CommandParameter="{Binding .}"/>
+                       </Grid>
+                    </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

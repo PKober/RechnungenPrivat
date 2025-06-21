@@ -18,7 +18,7 @@ namespace RechnungenPrivat.Navigation
             await InitializeViewModel(route);
         }
 
-        public async Task NavigateToAsync<T>(string route, IDictionary<string, object> parameters)
+        public async Task NavigateToAsync(string route, IDictionary<string, object> parameters)
         {
             await InitializeViewModel(route, parameters);
             await Shell.Current.GoToAsync(route, parameters);
