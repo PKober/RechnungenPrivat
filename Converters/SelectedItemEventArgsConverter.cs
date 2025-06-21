@@ -11,9 +11,10 @@ namespace RechnungenPrivat.Converters
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            if (value is SelectedItemChangedEventArgs args)
+          //  Shell.Current.DisplayAlert("Jo", $"Ich brauche den typ {value.GetType()}", "OK");
+            if (value is SelectionChangedEventArgs args)
             {
-                return args.SelectedItem;
+                return args.CurrentSelection.FirstOrDefault();
             }
             return null;
         }

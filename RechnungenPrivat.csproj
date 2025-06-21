@@ -67,6 +67,7 @@
 	<ItemGroup>
 		<PackageReference Include="ClosedXML" Version="0.105.0" />
 		<PackageReference Include="CommunityToolkit.Maui.Core" Version="11.2.0" />
+    <PackageReference Include="CommunityToolkit.Maui" Version="11.2.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
@@ -85,6 +86,9 @@
 	  </Compile>
 	  <Compile Update="Views\AusgabeAnlegen\AusgabeAnlegenView.xaml.cs">
 	    <DependentUpon>AusgabeAnlegenView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\AusgabeDetail\AusgabeDetailView.xaml.cs">
+	    <DependentUpon>AusgabeDetailView.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\KundenAnlegen\KundenAnlegenView.xaml.cs">
 	    <DependentUpon>KundenAnlegenView.xaml</DependentUpon>
@@ -111,6 +115,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\AusgabeAnlegen\AusgabeAnlegenView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\AusgabeDetail\AusgabeDetailView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\AusgabenAnzeigen\AusgabenAnzeigenView.xaml">

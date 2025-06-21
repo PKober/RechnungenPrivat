@@ -262,7 +262,7 @@ namespace RechnungenPrivat.Data.Datenbank
         public async Task<Ausgabe> GetAusgabeByIdAsync(int id)
         {
             await Init();
-            return await _database.Table<Ausgabe>().Where(a => a.ID == id).FirstOrDefaultAsync();
+            return await _database.Table<Ausgabe>().Where(a => a.Id == id).FirstOrDefaultAsync();
         }
 
         /// <summary>
@@ -278,7 +278,7 @@ namespace RechnungenPrivat.Data.Datenbank
         {
             await Init();
 
-            if(ausgabe.ID != 0)
+            if(ausgabe.Id != 0)
             {
                 return await _database.UpdateAsync(ausgabe);
             }else

@@ -10,7 +10,7 @@ namespace RechnungenPrivat.Models
     public class Ausgabe
     {
         [PrimaryKey,AutoIncrement]
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         [MaxLength(200)]
         public string Bezeichnung { get; set; }

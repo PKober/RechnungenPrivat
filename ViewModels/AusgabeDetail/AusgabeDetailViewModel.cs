@@ -25,18 +25,18 @@ namespace RechnungenPrivat.ViewModels.AusgabeDetail
         
 
         [ObservableProperty]
-        private string _ausgabeId ;
+        private int _ausgabeId ;
 
         private int _uebergebeneId;
 
         [ObservableProperty]
         private Ausgabe? _ausgabe;
 
-        partial void OnAusgabeIdChanged(string value)
+        partial void OnAusgabeIdChanged(int value)
         {
-            if(int.TryParse(value,out int parseId))
+            if(value != null)
             {
-                _selectedAusgabeId = parseId;
+                _selectedAusgabeId = value;
                 _ = InitializeAsync();
             }else
             {

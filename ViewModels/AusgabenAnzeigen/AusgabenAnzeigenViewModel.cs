@@ -28,7 +28,7 @@ namespace RechnungenPrivat.ViewModels.AusgabenAnzeigen
             _databaseService = databaseService;
             _navigationService = navigationService;
             _dialogService = dialogService;
-           _ =  InitializeAsync();
+           //_ =  InitializeAsync();
         }
         public bool ShowEmptyState => IsNotBusy && Ausgaben.Count == 0;
         public bool ShowAusgabenList => IsNotBusy && Ausgaben.Count > 0; 
@@ -99,12 +99,12 @@ namespace RechnungenPrivat.ViewModels.AusgabenAnzeigen
         }
 
         [RelayCommand]
-        private async void SelectAusgabeAsync(Ausgabe? value)
+        private async Task SelectAusgabeAsync(Ausgabe? value)
         {
             if (value == null) return;
 
-            var keyValues = new Dictionary<string, object> {{"AusgabeId",value.ID}};
-            _navigationService.NavigateToAsync($"{nameof(AusgabeDetailView)}",keyValues);
+            var keyValues = new Dictionary<string, object> {{"AusgabeId",value.Id}};
+            await _navigationService.NavigateToAsync($"{nameof(AusgabeDetailView)}",keyValues);
 
             
         }

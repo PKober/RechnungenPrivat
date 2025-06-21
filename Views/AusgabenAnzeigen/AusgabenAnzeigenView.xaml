@@ -28,12 +28,21 @@
 
         <CollectionView ItemsSource="{Binding Ausgaben}" IsVisible="{Binding ShowAusgabenList}" SelectionMode="Single">
                         <CollectionView.Behaviors>
+                <toolkit:EventToCommandBehavior 
+                    EventName="SelectionChanged"
+                    Command="{Binding SelectAusgabeCommand}"
+                    CommandParameter="{Binding SelectedAusgabe}"
+                    EventArgsConverter="{StaticResource SelectedItemEventArgsConverter}" 
+                    BindingContext="{Binding Source={x:Reference ThisPage}, Path=BindingContext}"
+                    
+                    />
 
-                        </CollectionView.Behaviors>
+
+            </CollectionView.Behaviors>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Ausgabe">
                     <Border Padding="10" Margin="10,5" >
-                        <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto">
+                        <Grid ColumnDefinitions="*, Auto,Auto" RowDefinitions="Auto, Auto">
                             <Label Grid.Row="0" Grid.Column="0" Text="{Binding Bezeichnung}" FontSize="Medium" FontAttributes="Bold" />
                             <Label Grid.Row="0" Grid.Column="1" Text="{Binding Betrag, StringFormat='{0:C}'}" FontSize="Medium" FontAttributes="Bold" TextColor="DarkRed" />
                             <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Datum, StringFormat='{0:d}'}" FontSize="Small" TextColor="Gray" />
