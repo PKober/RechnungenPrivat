@@ -1,6 +1,7 @@
 ﻿using RechnungenPrivat.Views.AufträgeFürKundenAnzeigen;
 using RechnungenPrivat.Views.AuftragErstellen;
 using RechnungenPrivat.Views.AusgabeAnlegen;
+using RechnungenPrivat.Views.AusgabeDetail;
 using RechnungenPrivat.Views.AusgabenAnzeigen;
 using RechnungenPrivat.Views.KundenAnlegen;
 using RechnungenPrivat.Views.KundenAnzeigen;
@@ -24,6 +25,7 @@ namespace RechnungenPrivat
             Routing.RegisterRoute(nameof(KundenStatistikView), typeof(KundenStatistikView));
             Routing.RegisterRoute(nameof(AusgabenAnzeigenView), typeof(AusgabenAnzeigenView));
             Routing.RegisterRoute(nameof(AusgabeAnlegenView), typeof(AusgabeAnlegenView));
+            Routing.RegisterRoute(nameof(AusgabeDetailView), typeof(AusgabeDetailView));
         }
 
 
