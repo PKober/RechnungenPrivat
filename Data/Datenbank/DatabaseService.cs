@@ -10,6 +10,8 @@ namespace RechnungenPrivat.Data.Datenbank
         private SQLiteAsyncConnection _database;
 
         private static string DbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RechnungenPrivat.db3");
+
+        #region Init Methoden 
         /// <summary>
         /// This method initializes the database connection and creates the tables if they do not exist.
         /// </summary>
@@ -23,9 +25,12 @@ namespace RechnungenPrivat.Data.Datenbank
             _database = new SQLiteAsyncConnection(DbPath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache);
             await _database.CreateTableAsync<Kunde>();
             await _database.CreateTableAsync<Auftrag>();
+            await _database.CreateTableAsync<Ausgabe>();
 
 
         }
+#endregion
+        #region Kunde Methoden 
         /// <summary>
         /// This method deletes a customer from the database.
         /// </summary>
@@ -138,6 +143,8 @@ namespace RechnungenPrivat.Data.Datenbank
             }
             return 0;
         }
+        #endregion
+        #region Auftrag Methoden
         /// <summary>
         /// This method Deletes one order from the database.
         /// </summary>
@@ -229,5 +236,68 @@ namespace RechnungenPrivat.Data.Datenbank
             await Init();
             return await _database.Table<Kunde>().Where(k => k.Id == auftragId).ToListAsync();
         }
+        #endregion
+        #region Ausgabe Methoden 
+
+        /// <summary>
+        /// Retrieves a list of all <see cref="Ausgabe"/> records from the database asynchronously.
+        /// </summary>
+        /// <remarks>This method initializes the database connection if it has not already been
+        /// initialized. The returned list contains all records of type <see cref="Ausgabe"/> stored in the
+        /// database.</remarks>
+        /// <returns>A task that represents the asynchronous operation. The task result contains a list of  <see cref="Ausgabe"/>
+        /// objects retrieved from the database. If no records are found, the list will be empty.</returns>
+        public async Task<List<Ausgabe>> GetAusgabenAsync()
+        {
+            await Init();
+            return await _database.Table<Ausgabe>().ToListAsync();
+        }
+
+        /// <summary>
+        /// Retrieves an <see cref="Ausgabe"/> object from the database by its unique identifier.
+        /// </summary>
+        /// <param name="id">The unique identifier of the <see cref="Ausgabe"/> to retrieve. Must be a positive integer.</param>
+        /// <returns>A task that represents the asynchronous operation. The task result contains the <see cref="Ausgabe"/> object
+        /// with the specified identifier, or <see langword="null"/> if no matching record is found.</returns>
+        public async Task<Ausgabe> GetAusgabeByIdAsync(int id)
+        {
+            await Init();
+            return await _database.Table<Ausgabe>().Where(a => a.Id == id).FirstOrDefaultAsync();
+        }
+
+        /// <summary>
+        /// Saves the specified <see cref="Ausgabe"/> instance to the database asynchronously.
+        /// </summary>
+        /// <remarks>This method initializes the database connection if it has not already been
+        /// initialized.</remarks>
+        /// <param name="ausgabe">The <see cref="Ausgabe"/> instance to save. If the <c>ID</c> property is 0, a new record is inserted;
+        /// otherwise, the existing record is updated.</param>
+        /// <returns>A task that represents the asynchronous operation. The task result contains the number of rows affected by
+        /// the operation.</returns>
+        public async Task<int> SaveAusgabeAsync(Ausgabe ausgabe)
+        {
+            await Init();
+
+            if(ausgabe.Id != 0)
+            {
+                return await _database.UpdateAsync(ausgabe);
+            }else
+            {
+                return await _database.InsertAsync(ausgabe);
+            }
+        }
+
+        /// <summary>
+        /// Deletes the specified <see cref="Ausgabe"/> record from the database asynchronously.
+        /// </summary>
+        /// <param name="ausgabe">The <see cref="Ausgabe"/> instance to delete. Cannot be <see langword="null"/>.</param>
+        /// <returns>A task that represents the asynchronous operation. The task result contains the number of rows affected by
+        /// the delete operation.</returns>
+        public async Task<int> DeleteAusgabeAsync(Ausgabe ausgabe)
+        {
+            await Init();
+            return await _database.DeleteAsync(ausgabe);
+        }
+        #endregion
     }
 }

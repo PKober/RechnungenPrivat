@@ -4,7 +4,7 @@
     {
 
         Task NavigateToAsync(string route);
-        Task NavigateToAsync<T>(string route, IDictionary<string, object> parameters);
+        Task NavigateToAsync(string route, IDictionary<string, object> parameters);
         Task GoBackAsync();
 
     }

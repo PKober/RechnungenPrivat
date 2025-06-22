@@ -42,6 +42,8 @@
                 Text="Go To Kunden liste anzeigen"
                 Command="{Binding GoToKundenAnzeigenCommand}"
                 />
+
+            <Button Text="Ausgaben Verwalten" Command="{Binding GoToAusgabenVerwaltenCommand}"/>
         </VerticalStackLayout>
     </ScrollView>
 

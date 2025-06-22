@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:RechnungenPrivat.ViewModels.AusgabeAnlegen"
+             x:DataType="viewmodels:AusgabeAnlegenViewModel"
+             x:Class="RechnungenPrivat.Views.AusgabeAnlegen.AusgabeAnlegenView"
+             Title="Neue Ausgabe erfassen">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label Text="Bezeichnung der Ausgabe" FontSize="Small" />
+            <Frame Padding="10" CornerRadius="8">
+                <Entry Text="{Binding Bezeichnung}" Placeholder="z.B. Büromaterial, Tanken..." />
+            </Frame>
+
+            <Label Text="Betrag (€)" FontSize="Small" />
+            <Frame Padding="10" CornerRadius="8">
+                <Entry Text="{Binding Betrag}" Placeholder="z.B. 49,99" Keyboard="Numeric" />
+            </Frame>
+
+            <Label Text="Datum der Ausgabe" FontSize="Small" />
+            <DatePicker Date="{Binding Datum}" />
+
+            <Label Text="Notizen" FontSize="Small" />
+            <Frame Padding="10" CornerRadius="8" HeightRequest="100">
+                <Editor Text="{Binding Notizen}" Placeholder="Optionale Details..." AutoSize="TextChanges" />
+            </Frame>
+
+            <Label Text="Beleg (Foto)" FontSize="Small" />
+
+            <Image x:Name="BelegPreview"
+                   Source="{Binding BelegFotoSource}"
+                   HeightRequest="200"
+                   Aspect="AspectFit">
+                <Image.Triggers>
+                    <DataTrigger TargetType="Image" Binding="{Binding BelegFoto}" Value="{x:Null}">
+                        <Setter Property="IsVisible" Value="False" />
+                    </DataTrigger>
+                </Image.Triggers>
+            </Image>
+
+            <Label Text="Kein Beleg ausgewählt"
+                   HorizontalOptions="Center"
+                   TextColor="Gray"
+                   Margin="0,20,0,0">
+                <Label.Triggers>
+                    <DataTrigger TargetType="Label" Binding="{Binding BelegFoto}" Value="{x:Null}">
+                        <Setter Property="IsVisible" Value="True" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="Label" Binding="{Binding BelegFoto}" Value="{x:Reference BelegPreview}">
+                        <Setter Property="IsVisible" Value="False" />
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
+
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,10,0,0">
+                <Button Grid.Column="0" Text="Foto aufnehmen" Command="{Binding CapturePhotoCommand}" />
+                <Button Grid.Column="1" Text="Aus Galerie" Command="{Binding PickPhotoCommand}" />
+            </Grid>
+
+            <Button Text="Ausgabe speichern" 
+                    Command="{Binding SaveAusgabeCommand}" 
+                    BackgroundColor="Green" 
+                    TextColor="White"
+                    FontSize="Large"
+                    Margin="0,20,0,0" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

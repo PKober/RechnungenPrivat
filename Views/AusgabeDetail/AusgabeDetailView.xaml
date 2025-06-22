@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:RechnungenPrivat.ViewModels.AusgabeDetail"
+             xmlns:converters="clr-namespace:RechnungenPrivat.Converters"
+             x:DataType="viewModel:AusgabeDetailViewModel"
+             x:Class="RechnungenPrivat.Views.AusgabeDetail.AusgabeDetailView"
+             
+             Title="AusgabeDetailView"
+             >
+    <ContentPage.Resources >
+        <converters:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSource"/>
+    </ContentPage.Resources>
+    
+    <ScrollView>
+        
+        
+        <VerticalStackLayout Padding="20">
+            <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <VerticalStackLayout IsVisible="{Binding IsNotBusy}">
+                <Label Text="Beleg" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <Image Source="{Binding Ausgabe.BelegFoto, Converter={StaticResource ByteArrayToImageSource}}" Aspect="AspectFit" HeightRequest="300"></Image>
+                <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,*,Auto">
+                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding Ausgabe.Bezeichnung}"></Label>
+                    <Label Grid.Row="1" Grid.Column="0" Text="{Binding Ausgabe.Betrag, StringFormat='{0:C}'}"/>
+                    <Label Grid.Row="2" Grid.Column="0" Text="{Binding Ausgabe.Notizen}"/>
+
+                </Grid>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+        
+</ContentPage>

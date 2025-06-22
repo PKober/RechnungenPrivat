@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using RechnungenPrivat.Data.Interfaces;
+using RechnungenPrivat.Views.AusgabenAnzeigen;
 using RechnungenPrivat.Views.KundenAnlegen;
 using RechnungenPrivat.Views.KundenAnzeigen;
 using RechnungenPrivat.Views.KundenLöschen;
@@ -35,6 +36,13 @@ namespace RechnungenPrivat.ViewModels.Startseite
         {
             var route = $"{nameof(KundenAnzeigenView)}";
             await _navigationService.NavigateToAsync(route);
+        }
+
+        [RelayCommand]
+        public async Task GoToAusgabenVerwalten()
+        {
+            var route = $"{nameof(AusgabenAnzeigenView)}";
+            await _navigationService.NavigateToAsync(route); 
         }
     }
 }
