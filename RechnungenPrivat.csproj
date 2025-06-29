@@ -65,6 +65,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiAsset Include="Resources\Templates\VorlageRathelbeckerweg42.docx" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="ClosedXML" Version="0.105.0" />
 		<PackageReference Include="CommunityToolkit.Maui.Core" Version="11.2.0" />
     <PackageReference Include="CommunityToolkit.Maui" Version="11.2.0" />

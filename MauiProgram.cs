@@ -59,6 +59,8 @@ public static class MauiProgram
         // Register the Media Serice 
         builder.Services.AddSingleton<IMediaService, MediaService>();
 
+        builder.Services.AddSingleton<IRechnungsService, RechnungsService>();
+
         // Register the ViewModels
         builder.Services.AddTransient<MainPageViewModel>();
         builder.Services.AddTransient<KundenAnlegenViewModel>();

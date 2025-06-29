@@ -44,6 +44,8 @@
                 />
 
             <Button Text="Ausgaben Verwalten" Command="{Binding GoToAusgabenVerwaltenCommand}"/>
+
+               <Button Text="Rechnung erstellen" Command="{Binding TestErstelleRechnungasyncCommand}"/> 
         </VerticalStackLayout>
     </ScrollView>
 
