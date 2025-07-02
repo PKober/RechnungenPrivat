@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Storage;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using RechnungenPrivat.Data.Interfaces;
 using RechnungenPrivat.Models;
@@ -13,12 +14,15 @@ namespace RechnungenPrivat.ViewModels.AufträgeFürKundenAnzeigenViewModel
         private readonly INavigationService _navigationService;
         private readonly IDatabaseService _databaseService;
         private readonly IDialogService _dialogService;
-
-        public AufträgeFürKundenAnzeigenViewModel(INavigationService navigationService, IDatabaseService databaseService, IDialogService dialogService)
+        private readonly IRechnungsService _rechnungsService;
+        public AufträgeFürKundenAnzeigenViewModel(INavigationService navigationService, IDatabaseService databaseService, IDialogService dialogService,
+            IRechnungsService rechnungsService)
         {
             _navigationService = navigationService;
             _databaseService = databaseService;
             _dialogService = dialogService;
+            _rechnungsService = rechnungsService;
+
             Aufträge = new ObservableCollection<Auftrag>();
         }
         [ObservableProperty]
@@ -39,6 +43,7 @@ namespace RechnungenPrivat.ViewModels.AufträgeFürKundenAnzeigenViewModel
         [ObservableProperty]
         private string _auftrasbeschreibung;
 
+        private string _kundenAdresse;
         partial void OnKundenIdChanged(int value)
         {
             _ = InitializeAsync();
@@ -59,6 +64,14 @@ namespace RechnungenPrivat.ViewModels.AufträgeFürKundenAnzeigenViewModel
                     {
                         Aufträge.Add(auftrag);
                     }
+                }
+
+                var kunde = await _databaseService.GetKundeByIdAsync(KundenId);
+                if(kunde != null)
+                {
+                    _kundenAdresse = kunde.KundenAdresse;
+                    KundenName = kunde.KundenName;
+
                 }
 
             }
@@ -110,6 +123,36 @@ namespace RechnungenPrivat.ViewModels.AufträgeFürKundenAnzeigenViewModel
                 Aufträge.Remove(SelectedAutrag);
                 SelectedAutrag = null;
                 AuftragGewählt = false;
+            }
+
+        }
+
+        [RelayCommand]
+        private async Task ExportToWordAsync(CancellationToken cancellationToken)
+        {
+            var kunde = new Kunde()
+            {
+                KundenAdresse = _kundenAdresse,
+                KundenName = KundenName
+            };
+
+            try{
+                IsBusy = true;
+                byte[] wordData = await _rechnungsService.ErstelleRechnungWordAsync(kunde, Aufträge);
+               
+                if (wordData != null)
+                {
+                    using var stream = new MemoryStream(wordData);
+                    var fileSaverResult = await FileSaver.Default.SaveAsync("Test.docx", stream);
+
+                }
+
+
+
+            }
+            finally
+            {
+                IsBusy = false;
             }
 
         }

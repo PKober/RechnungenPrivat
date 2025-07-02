@@ -5,8 +5,7 @@ using RechnungenPrivat.Models;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using CommunityToolkit.Maui.Storage;
-using ClosedXML.Excel;
-using System.IO;
+
 
 
 namespace RechnungenPrivat.ViewModels.KundenStatistik
@@ -120,13 +119,12 @@ namespace RechnungenPrivat.ViewModels.KundenStatistik
                     }
                 }
 
-                // Filter initialisieren (nur wenn noch nicht geschehen)
                 if (Monate.Count == 0)
                 {
                     InitializeFilterData();
                 }
 
-                // Initialfilter anwenden
+        
                 ApplyFilter();
             }
             catch (Exception ex)

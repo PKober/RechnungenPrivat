@@ -8,7 +8,7 @@
 
              Title="Aufträge für Kunden anzeigen">
     <Grid RowDefinitions="Auto, *">
-
+        <Button Command="{Binding ExportToWordCommand}" Text="ToWord"/>
         <CollectionView Grid.Row="1"
                 ItemsSource="{Binding Aufträge }"
                 SelectionMode="Single"
@@ -40,7 +40,7 @@
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-
+           
         </CollectionView>
 
     </Grid>

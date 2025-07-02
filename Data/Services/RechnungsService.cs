@@ -1,5 +1,7 @@
-﻿using RechnungenPrivat.Data.Interfaces;
+﻿using CommunityToolkit.Maui.Converters;
+using RechnungenPrivat.Data.Interfaces;
 using RechnungenPrivat.Models;
+using System.Drawing;
 using System.Globalization;
 using Xceed.Document.NET;
 using Xceed.Words.NET;
@@ -84,10 +86,10 @@ namespace RechnungenPrivat.Data.Services
 
                 var positionsTabelle = doc.AddTable(zeilenAnzahl,spaltenAnzahl);
 
-                positionsTabelle.Rows[0].Cells[0].Paragraphs.First().Append("Menge").Bold().Alignment = Alignment.center;
-                positionsTabelle.Rows[0].Cells[1].Paragraphs.First().Append("Beschreibung").Bold().Alignment = Alignment.center;
-                positionsTabelle.Rows[0].Cells[2].Paragraphs.First().Append("Einzelpreis").Bold().Alignment = Alignment.center;
-                positionsTabelle.Rows[0].Cells[3].Paragraphs.First().Append("Zeilensumme").Bold().Alignment = Alignment.center;
+                positionsTabelle.Rows[0].Cells[0].Paragraphs.First().Append("Menge").Bold().Color(Xceed.Drawing.Color.DarkGreen).Alignment = Alignment.center;
+                positionsTabelle.Rows[0].Cells[1].Paragraphs.First().Append("Beschreibung").Color(Xceed.Drawing.Color.DarkGreen).Bold().Alignment = Alignment.center;
+                positionsTabelle.Rows[0].Cells[2].Paragraphs.First().Append("Einzelpreis").Color(Xceed.Drawing.Color.DarkGreen).Bold().Alignment = Alignment.center;
+                positionsTabelle.Rows[0].Cells[3].Paragraphs.First().Append("Zeilensumme").Color(Xceed.Drawing.Color.DarkGreen).Bold().Alignment = Alignment.center;
                 int zeilenIndex = 1;
 
                 foreach (var auftrag in aufträge)
