@@ -24,49 +24,6 @@ namespace RechnungenPrivat.ViewModels.Startseite
 
 
         [RelayCommand]
-        public async Task TestErstelleRechnungasync(CancellationToken cancellationToken)
-        {
-            Kunde kunde = new Kunde()
-            {
-                KundenName = "PascalssssKober",
-                KundenAdresse = @"Irgendwo Im Nirgendwo
-ansonsten zuahuse"
-            };
-
-            List<Auftrag> auftrags = new List<Auftrag>()
-            {
-                new Auftrag()
-                {
-                    Auftragsname =  "Treppenhausreinigung",
-                    Typ = Auftragstyp.Pauschal,
-                    Betrag = 115,
-
-                },
-                new Auftrag()
-                {
-                    Auftragsname =  "Vorhof",
-                    Typ = Auftragstyp.Pauschal,
-                    Betrag = 152,
-                },
-                new Auftrag()
-                {
-                    Auftragsname =  "Ferienwohnung",
-                    Typ = Auftragstyp.Stundenbasiert,
-                    Stunden = 5,
-                    Stundensatz = (decimal)22.50,
-                    Betrag = (decimal)5 * (decimal)22.50
-
-                }
-            };
-
-
-            byte[] wordData = await _rechnungsService.ErstelleRechnungWordAsync(kunde, auftrags);
-
-            using var stream = new MemoryStream(wordData);
-            var fileSSaverResult = await FileSaver.Default.SaveAsync("Test.docx", stream);
-        }
-
-        [RelayCommand]
         public async Task GoToKundenAnlegen()
         {
             var route = $"{nameof(KundenAnlegenView)}";

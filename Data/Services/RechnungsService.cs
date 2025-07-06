@@ -64,6 +64,21 @@ namespace RechnungenPrivat.Data.Services
                 };
 
                 doc.ReplaceText(replaceOptions);
+#if DEBUG
+                Preferences.Set("LastInvoiceNumber", 113);
+
+#else
+                replaceOptions = new StringReplaceTextOptions
+                {
+                    SearchValue = "{{RECHNUNGSNUMMER}}",
+                    NewValue = Preferences.Get("LastInvoiceNumber", 113).ToString()
+                };
+                doc.ReplaceText(replaceOptions);
+
+                int lastInvoiceNumber = Preferences.Get("LastInvoiceNumber", 113);
+                lastInvoiceNumber++;
+                Preferences.Set("LastInvoiceNumber", lastInvoiceNumber);
+#endif
             }
         }
 
