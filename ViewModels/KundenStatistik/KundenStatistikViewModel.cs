@@ -5,8 +5,7 @@ using RechnungenPrivat.Models;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using CommunityToolkit.Maui.Storage;
-using ClosedXML.Excel;
-using System.IO;
+
 
 
 namespace RechnungenPrivat.ViewModels.KundenStatistik
@@ -19,14 +18,14 @@ namespace RechnungenPrivat.ViewModels.KundenStatistik
         private readonly INavigationService _navigationService;
         private readonly IExcelExportService _excelExportService;
         private readonly IDialogService _dialogService;
-
-        public KundenStatistikViewModel(IDatabaseService databaseService, INavigationService navigationService,IExcelExportService excelExportService,IDialogService dialogService)
+        private readonly IRechnungsService _rechnungsService;
+        public KundenStatistikViewModel(IDatabaseService databaseService, INavigationService navigationService,IExcelExportService excelExportService,IDialogService dialogService,IRechnungsService rechnungsService)
         {
             _databaseService = databaseService;
             _navigationService = navigationService;
             _excelExportService = excelExportService;
             _dialogService = dialogService;
-
+            _rechnungsService = rechnungsService;
 
             Aufträge = new ObservableCollection<Auftrag>();
             GefilterteAufträge = new ObservableCollection<Auftrag>();
@@ -37,6 +36,8 @@ namespace RechnungenPrivat.ViewModels.KundenStatistik
 
         [ObservableProperty]
         private int _kundenId;
+        [ObservableProperty]
+        private string _kundenAdresse;
         [ObservableProperty]
         private string _kundenName;
         [ObservableProperty]
@@ -96,6 +97,7 @@ namespace RechnungenPrivat.ViewModels.KundenStatistik
                 if (kunde != null)
                 {
                     KundenName = kunde.KundenName;
+                    KundenAdresse = kunde.KundenAdresse;
                 }
 
                 // Aufträge laden und berechnen
@@ -120,13 +122,12 @@ namespace RechnungenPrivat.ViewModels.KundenStatistik
                     }
                 }
 
-                // Filter initialisieren (nur wenn noch nicht geschehen)
                 if (Monate.Count == 0)
                 {
                     InitializeFilterData();
                 }
 
-                // Initialfilter anwenden
+        
                 ApplyFilter();
             }
             catch (Exception ex)
@@ -157,6 +158,8 @@ namespace RechnungenPrivat.ViewModels.KundenStatistik
                 ApplyFilter();
             }
         }
+
+
 
         public class MonatItem
         {
@@ -247,6 +250,37 @@ namespace RechnungenPrivat.ViewModels.KundenStatistik
             {
                 await _dialogService.DisplayAlert("Fehler", $"Ein unerwarteter Fehler ist aufgetreten: {ex.Message}", "OK");
             }
+        }
+        [RelayCommand]
+        private async Task ExportToWordAsync(CancellationToken cancellationToken)
+        {
+            var kunde = new Kunde()
+            {
+                KundenAdresse = KundenAdresse,
+                KundenName = KundenName
+            };
+
+            try
+            {
+                IsBusy = true;
+                string rechnungsNummer = Preferences.Get("LastInvoiceNumber", 113).ToString();
+                byte[] wordData = await _rechnungsService.ErstelleRechnungWordAsync(kunde, GefilterteAufträge);
+
+                if (wordData != null)
+                {
+                    using var stream = new MemoryStream(wordData);
+                    var fileSaverResult = await FileSaver.Default.SaveAsync($"{rechnungsNummer}_{SelectedMonatItem.Name}_{kunde.KundenAdresse}.docx", stream);
+
+                }
+
+
+
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+
         }
     }
 }

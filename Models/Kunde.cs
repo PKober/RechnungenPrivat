@@ -12,8 +12,5 @@ namespace RechnungenPrivat.Models
         [MaxLength(100)]
         public string KundenAdresse { get; set; }
 
-
-
-
     }
 }
