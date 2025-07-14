@@ -159,6 +159,8 @@ namespace RechnungenPrivat.ViewModels.KundenStatistik
             }
         }
 
+
+
         public class MonatItem
         {
             public string Name { get; set; }
