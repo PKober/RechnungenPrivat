@@ -46,6 +46,12 @@
             <Button Text="Ausgaben Verwalten" Command="{Binding GoToAusgabenVerwaltenCommand}"/>
 
 
+            <Button
+                Text="Go To Kundenanlegen"
+                Command="{Binding GoToPrivateStartSeiteCommand}"
+                />
+
+
         </VerticalStackLayout>
     </ScrollView>
 

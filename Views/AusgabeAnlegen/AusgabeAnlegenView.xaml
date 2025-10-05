@@ -2,12 +2,19 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:RechnungenPrivat.ViewModels.AusgabeAnlegen"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="viewmodels:AusgabeAnlegenViewModel"
              x:Class="RechnungenPrivat.Views.AusgabeAnlegen.AusgabeAnlegenView"
              Title="Neue Ausgabe erfassen">
+    <ContentPage.Resources>
+        <toolkit:InvertedBoolConverter x:Key="InvertBool" />
+    </ContentPage.Resources>
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="15">
+        <Grid ColumnDefinitions="*,*"
+              RowDefinitions="*,*">
+            
+        <VerticalStackLayout Padding="20" Spacing="15" Grid.ColumnSpan="2" Grid.Row="0">
 
             <Label Text="Bezeichnung der Ausgabe" FontSize="Small" />
             <Frame Padding="10" CornerRadius="8">
@@ -26,38 +33,91 @@
             <Frame Padding="10" CornerRadius="8" HeightRequest="100">
                 <Editor Text="{Binding Notizen}" Placeholder="Optionale Details..." AutoSize="TextChanges" />
             </Frame>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label 
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Text="Gewerbliche Ausgabe?"
 
-            <Label Text="Beleg (Foto)" FontSize="Small" />
+                    />
 
-            <Image x:Name="BelegPreview"
+                <Border
+                   Grid.Column="0"
+                    Grid.Row="1"
+                    StrokeShape="RoundRectangle 10,10,10,10"
+                    Padding="0"
+                    >
+                    <CheckBox
+                        x:Name="PrivateAusgabe"
+                        Margin="5"
+                        IsChecked="{Binding PrivateAusgabe}"
+                        >
+
+                    </CheckBox>
+                </Border>
+            </Grid>
+            <Grid Grid.Row="1" Grid.ColumnSpan="1" IsVisible="{Binding PrivateAusgabe}">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+
+                </Grid.ColumnDefinitions>
+                
+                <Label Text="Beleg (Foto)" FontSize="Small"
+                       Grid.Row="0"
+                       HorizontalOptions="Center"
+                       Grid.ColumnSpan="2"
+                       />
+
+
+
+                <Image x:Name="BelegPreview"
                    Source="{Binding BelegFotoSource}"
                    HeightRequest="200"
-                   Aspect="AspectFit">
-                <Image.Triggers>
-                    <DataTrigger TargetType="Image" Binding="{Binding BelegFoto}" Value="{x:Null}">
-                        <Setter Property="IsVisible" Value="False" />
-                    </DataTrigger>
-                </Image.Triggers>
-            </Image>
+                   Aspect="AspectFit"
+                   Grid.Row="1"
+                       >
+                    <Image.Triggers>
+                        <DataTrigger TargetType="Image" Binding="{Binding BelegFoto}" Value="{x:Null}">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                    </Image.Triggers>
+                </Image>
 
-            <Label Text="Kein Beleg ausgewählt"
+                <Label Text="Kein Beleg ausgewählt"
                    HorizontalOptions="Center"
                    TextColor="Gray"
-                   Margin="0,20,0,0">
-                <Label.Triggers>
-                    <DataTrigger TargetType="Label" Binding="{Binding BelegFoto}" Value="{x:Null}">
-                        <Setter Property="IsVisible" Value="True" />
-                    </DataTrigger>
-                    <DataTrigger TargetType="Label" Binding="{Binding BelegFoto}" Value="{x:Reference BelegPreview}">
-                        <Setter Property="IsVisible" Value="False" />
-                    </DataTrigger>
-                </Label.Triggers>
-            </Label>
+                   Margin="0,20,0,0"
+                       Grid.Row="1"
+                       Grid.ColumnSpan="2">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding BelegFoto}" Value="{x:Null}">
+                                <Setter Property="IsVisible" Value="True" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding BelegFoto}" Value="{x:Reference BelegPreview}">
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                </Label>
 
 
-            <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,10,0,0">
-                <Button Grid.Column="0" Text="Foto aufnehmen" Command="{Binding CapturePhotoCommand}" />
-                <Button Grid.Column="1" Text="Aus Galerie" Command="{Binding PickPhotoCommand}" />
+                <Grid Grid.Row="3" ColumnDefinitions="*,*" ColumnSpacing="10" Grid.ColumnSpan="3">
+                    <Button Grid.Column="0" Text="Foto aufnehmen" Command="{Binding CapturePhotoCommand}" IsEnabled="{Binding PrivateAusgabe}" />
+                    <Button Grid.Column="1" Text="Aus Galerie" Command="{Binding PickPhotoCommand}" />
+                </Grid>
             </Grid>
 
             <Button Text="Ausgabe speichern" 
@@ -68,5 +128,6 @@
                     Margin="0,20,0,0" />
 
         </VerticalStackLayout>
+        </Grid>
     </ScrollView>
 </ContentPage>

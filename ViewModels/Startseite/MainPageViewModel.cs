@@ -7,6 +7,7 @@ using RechnungenPrivat.Views.AusgabenAnzeigen;
 using RechnungenPrivat.Views.KundenAnlegen;
 using RechnungenPrivat.Views.KundenAnzeigen;
 using RechnungenPrivat.Views.KundenLöschen;
+using RechnungenPrivat.Views.PrivateSeiten.PrivateSeitenStartSeite;
 using System.Runtime.InteropServices;
 using System.Threading;
 
@@ -50,5 +51,13 @@ namespace RechnungenPrivat.ViewModels.Startseite
             var route = $"{nameof(AusgabenAnzeigenView)}";
             await _navigationService.NavigateToAsync(route); 
         }
+
+        [RelayCommand]
+        public async Task GoToPrivateStartSeite()
+        {
+            var route = $"{nameof(PrivateSeiteStarteSeiteView)}";
+            await _navigationService.NavigateToOhneViewModelAsync(route);
+        }
+        
     }
 }

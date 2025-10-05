@@ -37,6 +37,12 @@ namespace RechnungenPrivat.Navigation
                 await viewModel.InitializeAsync(parameter);
             }
         }
+        public async Task NavigateToOhneViewModelAsync(string route)
+        {
+
+            await Shell.Current.GoToAsync(route);
+           
+        }
     }
 
 }

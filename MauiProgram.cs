@@ -26,6 +26,9 @@ using RechnungenPrivat.Views.KundenAnzeigen;
 using RechnungenPrivat.Views.KundenLöschen;
 using RechnungenPrivat.Views.KundenStatistik;
 using RechnungenPrivat.Views.Startseite;
+using RechnungenPrivat.Views.PrivateSeiten.PrivateSeitenStartSeite;
+using Microcharts.Maui;
+using RechnungenPrivat.ViewModels.PrivateSeiten.PrivateSeiteStarteSeite;
 
 
 namespace RechnungenPrivat;
@@ -38,6 +41,7 @@ public static class MauiProgram
         builder
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
+            .UseMicrocharts()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -72,6 +76,7 @@ public static class MauiProgram
         builder.Services.AddTransient<AusgabeAnlegenViewModel>();
         builder.Services.AddTransient<AusgabenAnzeigenViewModel>();
         builder.Services.AddTransient<AusgabeDetailViewModel>();
+        builder.Services.AddTransient<PrivateSeiteStarteSeiteViewModel>();
 
         // Register the Views
         builder.Services.AddTransient<MainPage>();
@@ -84,7 +89,7 @@ public static class MauiProgram
         builder.Services.AddTransient<AusgabeAnlegenView>();
         builder.Services.AddTransient<AusgabenAnzeigenView>();
         builder.Services.AddTransient<AusgabeDetailView>();
-
+        builder.Services.AddTransient<PrivateSeiteStarteSeiteView>();
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

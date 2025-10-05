@@ -1,13 +1,8 @@
 ﻿using SQLite;
+using static RechnungenPrivat.Data.Enums;
 
 namespace RechnungenPrivat.Models
 {
-
-    public enum Auftragstyp
-    {
-        Pauschal,
-        Stundenbasiert
-    }
 
     [Table("Auftrag")]
     public class Auftrag
@@ -24,6 +19,7 @@ namespace RechnungenPrivat.Models
         public decimal? Stunden { get; set; }
         public decimal? Stundensatz { get; set; }
         public string Auftragsname { get; set; }
-
+        public EnumEinnahmentyp Einnahmentyp { get; set; }
+        
     }
 }

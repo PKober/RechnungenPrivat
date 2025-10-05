@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Globalization;
 using Xceed.Document.NET;
 using Xceed.Words.NET;
+using static RechnungenPrivat.Data.Enums;
 
 namespace RechnungenPrivat.Data.Services
 {

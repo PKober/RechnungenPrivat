@@ -9,4 +9,9 @@ public partial class AusgabeAnlegenView : ContentPage
 		InitializeComponent();
 		BindingContext = viewModel;
 	}
+
+    private void PrivateAusgabe_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+
+    }
 }

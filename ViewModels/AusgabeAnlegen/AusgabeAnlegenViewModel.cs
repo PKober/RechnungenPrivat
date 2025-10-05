@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static RechnungenPrivat.Data.Enums;
 
 namespace RechnungenPrivat.ViewModels.AusgabeAnlegen
 {
@@ -28,6 +29,7 @@ namespace RechnungenPrivat.ViewModels.AusgabeAnlegen
             _navigationService = navigationService;
             _dialogService = dialogService;
             _mediaService = mediaService;
+            this.Datum = DateTime.Now;  
 
         }
         [ObservableProperty]
@@ -43,8 +45,12 @@ namespace RechnungenPrivat.ViewModels.AusgabeAnlegen
         private string notizen;
 
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(BelegFotoSource))] 
+        [NotifyPropertyChangedFor(nameof(BelegFotoSource))]
         private byte[]? belegFoto;
+
+        [ObservableProperty]
+        private bool privateAusgabe;
+
 
         public ImageSource? BelegFotoSource => belegFoto == null ? null : ImageSource.FromStream(() => new MemoryStream(belegFoto));
 
@@ -67,11 +73,10 @@ namespace RechnungenPrivat.ViewModels.AusgabeAnlegen
                 BelegFoto = fotoData;
             }
         }
-
         [RelayCommand]
         private async Task SaveAusgabeAsync()
         {
-            if (string.IsNullOrWhiteSpace(Bezeichnung) || Betrag <= 0 || BelegFoto == null)
+            if (string.IsNullOrWhiteSpace(Bezeichnung) || Betrag <= 0)
             {
                 await _dialogService.DisplayAlert("Fehler", "Bitte füllen Sie Bezeichnung und Betrag aus und fügen Sie einen Beleg hinzu.", "OK");
                 return;
@@ -83,7 +88,9 @@ namespace RechnungenPrivat.ViewModels.AusgabeAnlegen
                 Betrag = this.Betrag,
                 Datum = this.Datum,
                 Notizen = this.Notizen,
-                BelegFoto = this.BelegFoto
+                BelegFoto = this.BelegFoto,
+                AusgabeTyp = this.PrivateAusgabe ? EnumAusgabeTyp.Gewerblich : EnumAusgabeTyp.Privat
+
             };
 
             var result = await _databaseService.SaveAusgabeAsync(neueAusgabe);
@@ -98,6 +105,7 @@ namespace RechnungenPrivat.ViewModels.AusgabeAnlegen
                 await _dialogService.DisplayAlert("Fehler", "Die Ausgabe konnte nicht gespeichert werden.", "OK");
             }
         }
+
 
     }
 }

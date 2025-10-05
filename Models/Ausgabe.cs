@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using SQLite;
 using System.Text;
 using System.Threading.Tasks;
+using static RechnungenPrivat.Data.Enums;
 
 namespace RechnungenPrivat.Models
 {
@@ -17,7 +18,8 @@ namespace RechnungenPrivat.Models
 
         public decimal Betrag { get; set; }
         public DateTime Datum { get; set; }
-        public byte[] BelegFoto { get; set; }
+        public byte[]? BelegFoto { get; set; }
         public string Notizen { get; set; }
+        public EnumAusgabeTyp AusgabeTyp { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using RechnungenPrivat.Data.Interfaces;
+﻿
+using RechnungenPrivat.Data.Interfaces;
 using RechnungenPrivat.Models;
 using SQLite;
 
@@ -114,18 +115,18 @@ namespace RechnungenPrivat.Data.Datenbank
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<string> GetKundeByID(int id)
+        public async Task<Kunde> GetKundeByID(int id)
         {
             await Init();
             var kunde = await _database.Table<Kunde>().Where(k => k.Id == id).FirstOrDefaultAsync();
             if (kunde != null)
             {
-                return kunde.KundenName;
-            }
-            else
+                return kunde;
+            }else
             {
-                return "Kunde nicht gefunden";
+                return null;
             }
+
         }
         /// <summary>
         /// This method deletes a customer by its name from the database.   
@@ -143,6 +144,19 @@ namespace RechnungenPrivat.Data.Datenbank
             }
             return 0;
         }
+
+
+
+        public async Task<KundeUndAuftrag> GetKundeUndAuftragByIdAsync(int id)
+        {
+
+            await Init();
+            KundeUndAuftrag kundeUndAuftrag = new KundeUndAuftrag();
+            kundeUndAuftrag.Kunde = await GetKundeByID(id);
+            kundeUndAuftrag.AufträgeVomKundenListe = await GetAllAuftraegeByKundeIdAsync(id);
+            return kundeUndAuftrag;
+        }
+
         #endregion
         #region Auftrag Methoden
         /// <summary>

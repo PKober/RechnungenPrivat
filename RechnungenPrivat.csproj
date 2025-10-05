@@ -74,13 +74,14 @@
 
 	<ItemGroup>
 		<PackageReference Include="ClosedXML" Version="0.105.0" />
-		<PackageReference Include="CommunityToolkit.Maui.Core" Version="11.2.0" />
-    <PackageReference Include="CommunityToolkit.Maui" Version="11.2.0" />
+    <PackageReference Include="CommunityToolkit.Maui" Version="12.2.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-		<PackageReference Include="DocX" Version="4.0.25105.5786" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
+		<PackageReference Include="DocX" Version="5.0.0" />
+		<PackageReference Include="Microcharts.Maui" Version="1.0.1" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.110" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.9" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
+		<PackageReference Include="SQLiteNetExtensions.Async" Version="2.1.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -113,6 +114,9 @@
 	  </Compile>
 	  <Compile Update="Views\KundenStatistik\KundenStatistikView.xaml.cs">
 	    <DependentUpon>KundenStatistikView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\PrivateSeiten\PrivateSeitenStartSeite\PrivateSeiteStarteSeiteView.xaml.cs">
+	    <DependentUpon>PrivateSeiteStarteSeiteView.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
@@ -147,6 +151,15 @@
 	  <MauiXaml Update="Views\KundenStatistik\KundenStatistikView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\PrivateSeiten\PrivateSeitenStartSeite\PrivateSeiteStarteSeiteView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Views\PrivateSeiten\PrivateStatistik\" />
+	  <Folder Include="Views\PrivateSeiten\PrivateEinnahmen\" />
+	  <Folder Include="Views\PrivateSeiten\PrivateAusgaben\" />
 	</ItemGroup>
 
 </Project>

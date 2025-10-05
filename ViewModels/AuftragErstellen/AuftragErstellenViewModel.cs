@@ -3,10 +3,12 @@ using CommunityToolkit.Mvvm.Input;
 using RechnungenPrivat.Data.Interfaces;
 using RechnungenPrivat.Models;
 using RechnungenPrivat.Views.Startseite;
+using static RechnungenPrivat.Data.Enums;
+
 
 namespace RechnungenPrivat.ViewModels.AuftragErstellen
 {
-    [QueryProperty(nameof(KundenId), "KundenId")]
+   // [QueryProperty(nameof(KundenId), "KundenId")]
     public partial class AuftragErstellenViewModel : ObservableObject
     {
         private readonly IDatabaseService _databaseService;
